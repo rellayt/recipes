@@ -1,0 +1,252 @@
+$primary__color: #ffbb00;
+.add__recipe__wrapper {
+  height: 90vh;
+  margin: 0 20% 0 20%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+.upper__headline {
+  font-size: 25px;
+  font-weight: 700;
+  width: 100%;
+  margin: 2% 0 2% 0;
+}
+.bottom__headline {
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  margin: 2% 0 2% 0;
+}
+.bottom__text {
+  width: 50%;
+  font-size: 1.4rem;
+}
+.bottom__text__last {
+  @extend .bottom__text;
+  margin-bottom: 0.7rem;
+}
+.headline span {
+  font-size: 25px;
+  font-weight: 600;
+}
+.recipe__uploaded__image__container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2%;
+
+  & > img {
+    display: flex;
+    margin-top: 5px;
+    border-radius: 2%;
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+  }
+  & > span {
+    margin-bottom: 1.5px;
+    font-size: 1.15rem;
+  }
+}
+#size__control__title {
+  width: 20.88vh;
+}
+#size__control__time {
+  width: 8vh;
+}
+#size__control__type {
+  width: 12vh;
+}
+.title__time__type__container {
+  display: flex;
+  flex-direction: column;
+}
+.time__type__wrapper {
+  margin-top: 1.5%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+option:hover {
+  background-color: $primary__color !important;
+  color: white !important;
+  cursor: pointer;
+}
+
+.textarea__container {
+  margin-top: 1.5%;
+  width: 96%;
+  height: 12.8vh;
+  margin-bottom: 2.7rem;
+  & > label {
+    font-size: 1.15rem;
+  }
+  & > textarea {
+    resize: none;
+    height: 95%;
+  }
+}
+.quantity__container {
+  font-size: 1.15rem;
+  width: 8rem;
+}
+.basic__info__ingredients__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-primary {
+  background-color: white;
+  color: $primary__color;
+  font-size: 19px;
+  width: 150px;
+  height: 50px;
+  border: 2px solid $primary__color;
+  transition: all 300ms ease;
+  opacity: 1;
+  &:hover,
+  &:active,
+  &:visited {
+    transition: all 300ms ease;
+    opacity: 0.9;
+    background-color: $primary__color !important;
+    color: white !important;
+    border: 2px solid $primary__color !important;
+    box-shadow: none !important;
+  }
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+.form-control {
+  border: 2px solid $primary__color;
+  transition: all 300ms ease;
+  &:hover,
+  &:focus,
+  &:active,
+  &:visited {
+    transition: all 300ms ease;
+    border: 2px solid $primary__color !important;
+    box-shadow: none !important;
+  }
+}
+
+select:focus > option:checked {
+  background: $primary__color;
+  color: white;
+}
+.small__object__wrapper {
+  display: flex;
+  flex-direction: column;
+  & > label {
+    font-size: 1.15rem;
+  }
+}
+.type__wrapper {
+  @extend .small__object__wrapper;
+  margin-left: 0.4rem;
+}
+.preparing__wrapper {
+  width: 50%;
+}
+.quantity__name__wrapper {
+  display: flex;
+  flex-direction: row;
+}
+.ingrendient__name__container {
+  font-size: 1.15rem;
+}
+.quantity__name__inputs_wrapper {
+  margin-top: 0.4rem;
+  display: flex;
+  margin-bottom: 0.4rem;
+}
+.basic__info__wrapper {
+  width: 100%;
+  height: auto;
+}
+
+.ingredients__wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.info__ingredients__wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 42vh;
+}
+.ingredient__name__input__container {
+  & > input {
+    width: 50%;
+  }
+}
+.quantity__input__container {
+  margin-right: 3.5rem;
+}
+#size__control__quantity__input {
+  width: 4.5rem;
+}
+#size__control__name__input {
+  width: 12rem;
+}
+.add-next-ingredient-button {
+  width: 34vh;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#size__control__ingredient__button {
+  margin-top: 0.4rem;
+  width: 11vh;
+  height: 5vh;
+}
+.total__wrap {
+  display: flex;
+  flex-direction: column;
+}
+.step__container {
+  font-size: 1.5rem;
+  list-style-type: decimal;
+  font-weight: 500;
+  margin-left: 1.7rem;
+}
+#size__control__step__input {
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+  width: 95%;
+  height: 9.6vh;
+  resize: none;
+}
+.li__textarea__container {
+}
+.next__step__button {
+  width: 95%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+#size__control__preparing__button {
+  margin-bottom: 0.2rem;
+  width: 14vh;
+  height: 5vh;
+}
+.submit__section__container {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  width: 50%;
+}
+#size__control__submit__button {
+  color: white;
+  background-color: $primary__color;
+  font-size: 1.7rem;
+  width: 15vh;
+  height: 6vh;
+  &:hover {
+    color: $primary__color;
+    background-color: white;
+  }
+}

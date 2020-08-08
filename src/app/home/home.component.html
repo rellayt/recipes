@@ -1,0 +1,38 @@
+<div class="home-recipes">
+  <section class="headline">
+    <span>Latest recipes</span>
+  </section>
+  <section class="latest-recipes-images">
+    <div class="recipe-outter-container">
+      <div
+        (click)="getRecipeDetails(getRecipeIndex(0))"
+        class="new-recipe-img-container"
+      >
+        <img class="new-recipe-img-container" src="{{ getRecipeImage(0) }}" />
+      </div>
+      <span class="recipe-time">{{ getRecipeTime(0) }}</span>
+      <span class="recipe-title">{{ getRecipeTitle(0) }}</span>
+    </div>
+
+    <div class="recipe-outter-container">
+      <div
+        (click)="getRecipeDetails(getRecipeIndex(1))"
+        class="old-recipe-img-container"
+      >
+        <img class="old-recipe-img-container" src="{{ getRecipeImage(1) }}" />
+      </div>
+      <span class="recipe-time">{{ getRecipeTime(1) }}</span>
+      <span class="recipe-title">{{ getRecipeTitle(1) }}</span>
+    </div>
+    <div class="recipe-outter-container">
+      <div
+        (click)="getRecipeDetails(getRecipeIndex(2))"
+        class="old-recipe-img-container"
+      >
+        <img class="old-recipe-img-container" src="{{ getRecipeImage(2) }}" />
+      </div>
+      <span class="recipe-time">{{ getRecipeTime(2) }}</span>
+      <span class="recipe-title">{{ getRecipeTitle(2) }}</span>
+    </div>
+  </section>
+</div>

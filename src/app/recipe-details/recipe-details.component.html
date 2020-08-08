@@ -1,0 +1,46 @@
+<div class="recipe-details-wrapper">
+  <div class="recipe-wrapper">
+    <div class="recipe-image-container">
+      <div class="recipe-image">
+        <img class="recipe-image" src="{{ getRecipeImage() }}" />
+      </div>
+      <div class="recipe-title-timer-wrapper">
+        <span class="recipe-details-time">{{ getRecipeTime() }}</span>
+        <span class="recipe-details-title">{{ getRecipeTitle() }}</span>
+      </div>
+    </div>
+    <div class="recipe-desc-preparing-wrapper">
+      <div class="recipe-desc-container">{{ getRecipeDescription() }}</div>
+      <div class="preparing-title">Preparing</div>
+      <ul>
+        <li
+          *ngFor="let preparing of recipePreparings"
+          class="recipe-preparing-container"
+        >
+          {{ preparing.step }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="recipe-wrapper-2">
+    <div class="button-outter-container">
+      <div class="button-container">
+        <button type="button" class="btn btn-primary">Edit</button>
+      </div>
+      <div class="button-container">
+        <button type="button" class="btn btn-primary">Delete</button>
+      </div>
+    </div>
+    <div class="ingredients-title">Ingredients</div>
+    <ng-container *ngFor="let ingredient of recipeIngredients">
+      <ul>
+        <div class="quantity-ingredient-wrapper">
+          <li class="quantity-ingredient-container">
+            <div class="quantity-container">{{ ingredient.quantity }}</div>
+            <div class="ingredient-container">{{ ingredient.ingredient }}</div>
+          </li>
+        </div>
+      </ul>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,161 @@
+<div class="add__recipe__wrapper">
+  <section class="upper__headline">
+    <span>Add recipe</span>
+  </section>
+  <section class="bottom__headline">
+    <div class="bottom__text">Basic information</div>
+    <div class="bottom__text">Ingredients</div>
+  </section>
+  <div class="total__wrap">
+    <div class="info__ingredients__wrapper">
+      <div class="basic__info__wrapper">
+        <form>
+          <div class="title__time__type__container">
+            <div class="small__object__wrapper">
+              <label>Title</label>
+              <input
+                type="text"
+                class="form-control"
+                id="size__control__title"
+                [(ngModel)]="titleInput"
+                [ngModelOptions]="{ standalone: true }"
+              />
+            </div>
+            <div class="time__type__wrapper">
+              <div class="small__object__wrapper">
+                <label>Time</label>
+                <input
+                  type="number"
+                  min="0"
+                  class="form-control"
+                  id="size__control__time"
+                  [(ngModel)]="timeInput"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+              </div>
+              <div class="type__wrapper">
+                <select
+                  class="form-control"
+                  id="size__control__type"
+                  [(ngModel)]="selectedLevel"
+                  [ngModelOptions]="{ standalone: true }"
+                >
+                  <option
+                    class="option__container"
+                    *ngFor="let type of selectTimeType"
+                    [ngValue]="type"
+                    >{{ type.value }}</option
+                  >
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="textarea__container">
+          <label>Description</label>
+          <textarea
+            [(ngModel)]="descriptionInput"
+            class="form-control"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <button
+          (click)="fileInput.click()"
+          class="btn btn-primary"
+          *ngIf="!imageUploaded"
+        >
+          Upload image
+          <input
+            #fileInput
+            type="file"
+            (change)="uploadImage($event)"
+            style="display: none;"
+          />
+        </button>
+        <div class="recipe__uploaded__image__container" *ngIf="imageUploaded">
+          <span>Uploaded image</span>
+          <img src="{{ getRecipeUploadedImage() }}" />
+        </div>
+      </div>
+      <div class="ingredients__wrapper">
+        <div class="quantity__name__wrapper">
+          <span class="quantity__container">Quantity</span>
+          <span class="ingrendient__name__container">Name</span>
+        </div>
+        <div
+          *ngFor="let ingredient of ingredients; let i = index"
+          class="quantity__name__inputs_wrapper"
+        >
+          <div class="quantity__input__container">
+            <input
+              type="text"
+              class="form-control"
+              id="size__control__quantity__input"
+              [(ngModel)]="ingredients[i].quantity"
+            />
+          </div>
+          <div class="ingredient__name__input__container">
+            <input
+              type="text"
+              class="form-control"
+              id="size__control__name__input"
+              [(ngModel)]="ingredients[i].name"
+            />
+          </div>
+        </div>
+        <div class="add-next-ingredient-button">
+          <button
+            type="button"
+            id="size__control__ingredient__button"
+            class="btn btn-primary"
+            (click)="addIngredient()"
+          >
+            Add next
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="preparing__wrapper">
+      <div class="bottom__text__last">Preparing</div>
+      <div class="li__textarea__container">
+        <ul>
+          <li
+            *ngFor="let step of preparing; let i = index"
+            class="step__container"
+          >
+            <textarea
+              class="form-control"
+              id="size__control__step__input"
+              [(ngModel)]="preparing[i].stepName"
+              rows="3"
+            ></textarea>
+          </li>
+        </ul>
+      </div>
+      <div class="next__step__button">
+        <button
+          type="button"
+          id="size__control__preparing__button"
+          class="btn btn-primary"
+          (click)="addStep(preparing.length)"
+        >
+          Next step
+        </button>
+      </div>
+    </div>
+    <section class="submit__section__container">
+      <div class="col text-center">
+        <button
+          type="button"
+          id="size__control__submit__button"
+          class="btn btn-primary"
+          (click)="addRecipe()"
+        >
+          Submit
+        </button>
+      </div>
+    </section>
+  </div>
+</div>

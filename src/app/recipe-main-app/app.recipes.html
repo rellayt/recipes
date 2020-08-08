@@ -1,0 +1,21 @@
+<div class="recipes-page-wrapper">
+  <div class="recipes-nav-wrapper">
+    <nav class="recipes-navbar">
+      <button (click)="intoHomePage()"><i class="fa fa-home"></i></button>
+      <ul class="hide">
+        <li class="nav-recipes-item">
+          <a href="#" (click)="intoAddPage()">Add recipe</a>
+        </li>
+        <li class="nav-recipes-item"><a href="#">Sample 1</a></li>
+        <li class="nav-recipes-item"><a href="#">Sample 2</a></li>
+        <li class="nav-recipes-item"><a href="#">Sample 3</a></li>
+      </ul>
+    </nav>
+  </div>
+  <app-home *ngIf="homePage" (recipeIndex)="intoDetailsPage($event)"></app-home>
+  <app-recipe-details
+    *ngIf="detailsPage"
+    [currentRecipeIndex]="selectedRecipeId"
+  ></app-recipe-details>
+  <app-recipe-adding *ngIf="addPage"></app-recipe-adding>
+</div>
