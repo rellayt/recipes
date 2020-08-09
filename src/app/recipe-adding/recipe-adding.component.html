@@ -3,8 +3,8 @@
     <span>Add recipe</span>
   </section>
   <section class="bottom__headline">
-    <div class="bottom__text">Basic information</div>
-    <div class="bottom__text">Ingredients</div>
+    <span class="bottom__text">Basic information</span>
+    <span *ngIf="!mobileMode" class="bottom__text__ing">Ingredients</span>
   </section>
   <div class="total__wrap">
     <div class="info__ingredients__wrapper">
@@ -80,6 +80,8 @@
         </div>
       </div>
       <div class="ingredients__wrapper">
+        <span *ngIf="mobileMode" class="bottom__text__ing">Ingredients</span>
+
         <div class="quantity__name__wrapper">
           <span class="quantity__container">Quantity</span>
           <span class="ingrendient__name__container">Name</span>
@@ -105,7 +107,7 @@
             />
           </div>
         </div>
-        <div class="add-next-ingredient-button">
+        <div class="add__next__ingredient__button">
           <button
             type="button"
             id="size__control__ingredient__button"
@@ -119,7 +121,7 @@
     </div>
     <div class="preparing__wrapper">
       <div class="bottom__text__last">Preparing</div>
-      <div class="li__textarea__container">
+      <div>
         <ul>
           <li
             *ngFor="let step of preparing; let i = index"
@@ -146,7 +148,7 @@
       </div>
     </div>
     <section class="submit__section__container">
-      <div class="col text-center">
+      <div *ngIf="!mobileMode" class="col text-center">
         <button
           type="button"
           id="size__control__submit__button"
@@ -156,6 +158,15 @@
           Submit
         </button>
       </div>
+      <button
+        *ngIf="mobileMode"
+        type="button"
+        id="size__control__submit__button"
+        class="btn btn-primary"
+        (click)="addRecipe()"
+      >
+        Submit
+      </button>
     </section>
   </div>
 </div>

@@ -27,18 +27,14 @@ export class imageService {
     this.getUrl(snap);
   }
 
-
   private async getUrl(snap: firebase.storage.UploadTaskSnapshot) {
     const url = await snap.ref.getDownloadURL();
     this.imageUrlRecipe = url;
-    console.log('%c%s', 'color: #731d1d', this.imageUrlRecipe);
     this.changeImageProperties(this.imageUrlRecipe);
   }
 
   changeImageProperties(imageURL: string) {
     this.imageSource.next(imageURL);
   }
-
-
 }
 

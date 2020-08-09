@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { recipeData, recipeIngredientsData, recipePreparingData } from '../recipeData';
 import { recipeIngredientService } from '../services/recipe.ingredient.service';
 import { recipePreparingService } from '../services/recipe.preparing.service';
@@ -20,29 +20,27 @@ export interface preparing {
 })
 export class RecipeAddingComponent implements OnInit {
 
+  // Variable responsible for getting MAX recipe ID
   recipeMaxIndex = 0;
 
+  // Variable that store data from firebase
   recipes: recipeData[];
+
+  // Variables used to finally add data to the firebase
+  recipeToAdd: recipeData = { description: '', title: '', time: '', recipeId: 1, image: '' };
   recipeIngredientToAdd: recipeIngredientsData = { recipeId: 0, quantity: '', ingredient: '' };
   recipePreparingToAdd: recipePreparingData = { recipeId: 0, step: '', stepNumber: 1 };
 
-  recipeToAdd: recipeData = { description: '', title: '', time: '', recipeId: 1, image: '' };
-
+  // Input variables
   titleInput = '';
   timeInput: number;
   timeTypeInput = '';
   descriptionInput = '';
-  // quantityInput: string[];
-  // ingredientInput: string[];
-  stepCount = 0;
   stepInput: string[];
-
-  selectedLevel;
   selectTimeType: selectOption[] = [{ id: 0, value: 'minutes' }, { id: 1, value: 'hours' }];
-
+  stepCount = 0;
+  selectedLevel;
   imageUploaded = false;
-  startReceivingImage = false;
-  imageReceived = false;
 
   public preparing: preparing[] = [{
     stepNumber: 1,
@@ -53,11 +51,18 @@ export class RecipeAddingComponent implements OnInit {
     name: '',
   }];
 
+  // Variables used to improve website responsiveness
+  public innerWidth: any;
+  mobileMode = false;
 
-  // tslint:disable-next-line: max-line-length
   constructor(public recipeService: recipeService, public recipeIngredientService: recipeIngredientService, public recipePreparingService: recipePreparingService, public images: imageService) { }
 
   ngOnInit(): void {
+    // Checking for page width
+    this.innerWidth = window.innerWidth;
+    this.checkForWidth();
+
+    // Calling methods to get max recipe id and url of uploaded image
     this.recipeService.getRecipes().subscribe(recipes => {
       this.recipes = recipes;
       if (this.recipes) {
@@ -73,11 +78,12 @@ export class RecipeAddingComponent implements OnInit {
     });
   }
 
+  // Method responsible for validate inputs, prepare final variables to be added,
+  // adding recipe to database and reset input values
   addRecipe() {
     const findEmptyName = this.ingredients.find(x => x.name === '') ? true : false;
     const findEmptyQuantity = this.ingredients.find(x => x.quantity === '') ? true : false;
     const findEmptyPrepareField = this.preparing.find(x => x.stepName === '') ? true : false;
-    console.log('%c%s', 'color: #731d6d', this.checkInputs());
 
     if (!findEmptyName && !findEmptyQuantity && !findEmptyPrepareField && this.checkInputs()) {
       let recipeTime;
@@ -101,40 +107,18 @@ export class RecipeAddingComponent implements OnInit {
         this.recipePreparingToAdd.stepNumber = prepare.stepNumber;
         this.recipePreparingToAdd.step = prepare.stepName;
         this.recipePreparingService.addRecipePreparing(this.recipePreparingToAdd);
-        // console.log('step nr:', this.preparing[i].stepNumber, 'step name: ', this.preparing[i].stepName);
       }
       for (const ingredient of this.ingredients) {
         this.recipeIngredientToAdd.ingredient = ingredient.name;
         this.recipeIngredientToAdd.quantity = ingredient.quantity;
         this.recipeIngredientService.addRecipeIngredient(this.recipeIngredientToAdd);
-        // console.log('quantity', this.ingredients[i].quantity, 'ing name: ', this.ingredients[i].name)
       }
       this.recipeService.addRecipe(this.recipeToAdd);
-      this.titleInput = '';
-      this.timeInput = undefined;
-      this.descriptionInput = '';
-      this.recipeToAdd.image = '';
-      this.recipeMaxIndex = undefined;
-      this.selectedLevel = undefined;
-      this.preparing = [{
-        stepNumber: 1,
-        stepName: '',
-      }];
-      this.ingredients = [{
-        quantity: '',
-        name: '',
-      }];
-      this.imageUploaded = false;
-
-      // console.log('title: ', this.titleInput);
-      // console.log('time: ', this.timeInput);
-      // console.log('time type: ', this.selectedLevel.value);
-      // console.log('desc: ', this.descriptionInput);
-      // console.log('img: ', this.recipeToAdd.image);
-
+      this.resetInputValues();
     }
   }
 
+  // Method responsible for validating and adding single ingredient to temporary array which will be added to database
   addIngredient() {
     const findEmptyName = this.ingredients.find(x => x.name === '') ? true : false;
     const findEmptyQuantity = this.ingredients.find(x => x.quantity === '') ? true : false;
@@ -144,9 +128,10 @@ export class RecipeAddingComponent implements OnInit {
       this.ingredients.push(emptyIngredient);
     }
   }
+
+  // Method responsible for validating and adding single preape step to temporary array which will be added to database
   addStep(stepNumber: number) {
     const findEmptyPrepareField = this.preparing.find(x => x.stepName === '') ? true : false;
-    console.log('%c%s', 'color: #006dcc', findEmptyPrepareField);
 
     if (!findEmptyPrepareField) {
       const emptyPrepareField: preparing = { stepNumber: stepNumber + 1, stepName: '' }
@@ -160,14 +145,55 @@ export class RecipeAddingComponent implements OnInit {
       this.images.putImage(file, this.recipeMaxIndex + 1);
     }
   }
+
+  // Method which returns url of uploaded image
   getRecipeUploadedImage = () => {
     return this.recipeToAdd.image ? this.recipeToAdd.image : '';
   }
+
+  // Method responsible for validate title, prepare time, description, selected level and image's url inputs
   checkInputs = (): boolean => {
     if (this.titleInput !== '' && this.timeInput && this.descriptionInput !== '' && this.selectedLevel && this.recipeToAdd.image) {
       return true;
     } else {
       return false;
+    }
+  }
+
+  // Method responsible for reseting input value
+  resetInputValues() {
+    this.titleInput = '';
+    this.timeInput = undefined;
+    this.descriptionInput = '';
+    this.recipeToAdd.image = '';
+    this.images.changeImageProperties('');
+    this.recipeMaxIndex = undefined;
+    this.selectedLevel = undefined;
+    this.preparing = [{
+      stepNumber: 1,
+      stepName: '',
+    }];
+    this.ingredients = [{
+      quantity: '',
+      name: '',
+    }];
+    this.imageUploaded = false;
+  }
+
+  // Checking page width for mobile efficiency
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = Number(window.innerWidth);
+    this.checkForWidth();
+  }
+
+  checkForWidth = () => {
+    if (this.innerWidth >= 535 && this.innerWidth <= 560) {
+      this.mobileMode = true;
+    } else if (this.innerWidth >= 320 && this.innerWidth <= 420) {
+      this.mobileMode = true;
+    } else {
+      this.mobileMode = false;
     }
   }
 }

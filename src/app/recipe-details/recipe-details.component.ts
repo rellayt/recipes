@@ -10,37 +10,41 @@ import { recipeData, recipeIngredientsData, recipePreparingData } from '../recip
   styleUrls: ['./recipe-details.component.scss']
 })
 export class RecipeDetailsComponent implements OnInit {
+  // Variable represents the id of the recipe which is selected by user
   @Input()
-  currentRecipeIndex: number;
+  selectedRecipeID: number;
 
+  // Variable which emits information about going to the home page
   @Output()
   intoHomePage: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  // Variables that store data from firebase
   recipe: recipeData;
   recipeIngredients: recipeIngredientsData[];
   recipePreparings: recipePreparingData[];
 
-  ingredientExample: recipeIngredientsData = { recipeId: 3, quantity: '1 tsp', ingredient: 'Worcestershire sauce' }
-  preparingExample: recipePreparingData = { recipeId: 3, stepNumber: 5, step: 'Add chopped anchovy fillets and garlic, lemon juice, Worcestershire sauce, mustard, white balsamic vinegar, and sugar to the egg yolk and mix with a hand blender.' }
-
   constructor(public recipeService: recipeService, public recipeIngredientService: recipeIngredientService, public recipePreparingService: recipePreparingService) { }
 
   ngOnInit(): void {
+    // Calling methods that allow data to be received from firebase
+
     this.recipeService.getRecipes().subscribe(recipes => {
-      this.recipe = recipes.find(recipe => recipe.recipeId === this.currentRecipeIndex);
+      // Getting single recipe by selected recipe ID
+      this.recipe = recipes.find(recipe => recipe.recipeId === this.selectedRecipeID);
     });
     this.recipeIngredientService.getRecipeIngredients().subscribe(recipeIngredients => {
-      this.recipeIngredients = recipeIngredients.filter(ingredients => ingredients.recipeId === this.currentRecipeIndex);
+      // Getting array of recipe's ingredients by selected recipe ID and sorting it ascending
+      this.recipeIngredients = recipeIngredients.filter(ingredients => ingredients.recipeId === this.selectedRecipeID);
       this.recipeIngredients.sort();
     });
     this.recipePreparingService.getRecipePreparings().subscribe(recipePreparings => {
-      // tslint:disable-next-line: max-line-length
-      this.recipePreparings = recipePreparings.filter(preparings => preparings.recipeId === this.currentRecipeIndex);
+      // Getting array of recipe's preparing steps by selected recipe ID and sorting it ascending
+      this.recipePreparings = recipePreparings.filter(preparings => preparings.recipeId === this.selectedRecipeID);
       this.recipePreparings.sort((a, b) => a.stepNumber - b.stepNumber);
     });
-    // this.recipeIngredientService.addRecipeIngredient(this.ingredientExample);
-    // this.recipePreparingService.addRecipePreparing(this.preparingExample);
   }
+
+  // Methods which allows to get recipe parameters
   getRecipeImage = (): string => {
     if (this.recipe) {
       return this.recipe.image;
@@ -61,6 +65,8 @@ export class RecipeDetailsComponent implements OnInit {
       return this.recipe.description;
     }
   }
+
+  // Method responsible for deleting recipe from database
   deleteRecipe = () => {
     this.intoHomePage.emit(true);
     this.recipeService.deleteRecipe(this.recipe);

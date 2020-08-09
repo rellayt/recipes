@@ -1,30 +1,55 @@
 $primary__color: #ffbb00;
 .add__recipe__wrapper {
   height: 90vh;
-  margin: 0 20% 0 20%;
+  margin: 0 20% 0 21%;
   width: 60%;
   display: flex;
   flex-direction: column;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    margin: 0 10% 0 10.5%;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    margin: 0 3%;
+  }
 }
 .upper__headline {
   font-size: 25px;
   font-weight: 700;
   width: 100%;
-  margin: 2% 0 2% 0;
+  margin: 2% 0;
 }
 .bottom__headline {
   font-size: 20px;
   display: flex;
   width: auto;
-  margin: 2% 0 2% 0;
+  margin: 2% 0;
 }
 .bottom__text {
   width: 50%;
   font-size: 1.4rem;
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 100%;
+  }
+}
+.bottom__text__ing {
+  font-size: 1.4rem;
+
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    margin-left: 56px;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    margin: 1.5rem 0;
+  }
 }
 .bottom__text__last {
   @extend .bottom__text;
   margin-bottom: 0.7rem;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    margin-top: 1rem;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    margin-top: 1rem;
+  }
 }
 .headline span {
   font-size: 25px;
@@ -51,12 +76,33 @@ $primary__color: #ffbb00;
 }
 #size__control__title {
   width: 20.88vh;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 22vw;
+    margin-right: 40px;
+  }
+
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 50vw;
+    margin-right: 40px;
+  }
 }
 #size__control__time {
   width: 8vh;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 7.5vw;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 18.5vw;
+  }
 }
 #size__control__type {
   width: 12vh;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 14vw;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 30vw;
+  }
 }
 .title__time__type__container {
   display: flex;
@@ -66,6 +112,12 @@ $primary__color: #ffbb00;
   margin-top: 1.5%;
   display: flex;
   align-items: flex-end;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    margin-top: 3%;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    margin-top: 3%;
+  }
 }
 
 option:hover {
@@ -86,10 +138,26 @@ option:hover {
     resize: none;
     height: 95%;
   }
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    height: 27vh;
+    width: 100%;
+    margin-top: 3%;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    height: 29vh;
+    width: 90vw;
+    margin-top: 3%;
+  }
 }
 .quantity__container {
   font-size: 1.15rem;
   width: 8rem;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 7rem;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 7rem;
+  }
 }
 .basic__info__ingredients__wrapper {
   display: flex;
@@ -170,11 +238,20 @@ select:focus > option:checked {
   display: flex;
   flex-direction: column;
   width: 100%;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    margin-left: 10vw;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    margin: 0;
+  }
 }
 .info__ingredients__wrapper {
   display: flex;
   width: 100%;
   min-height: 42vh;
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    flex-direction: column;
+  }
 }
 .ingredient__name__input__container {
   & > input {
@@ -183,6 +260,12 @@ select:focus > option:checked {
 }
 .quantity__input__container {
   margin-right: 3.5rem;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    margin-right: 2.5rem;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    margin-right: 2.5rem;
+  }
 }
 #size__control__quantity__input {
   width: 4.5rem;
@@ -190,16 +273,30 @@ select:focus > option:checked {
 #size__control__name__input {
   width: 12rem;
 }
-.add-next-ingredient-button {
-  width: 34vh;
+.add__next__ingredient__button {
+  width: 36vh;
   display: flex;
   flex-direction: row-reverse;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 57vh;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    flex-direction: row;
+  }
 }
 
 #size__control__ingredient__button {
   margin-top: 0.4rem;
-  width: 11vh;
+  width: 12vh;
   height: 5vh;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 21vh;
+    height: 8vh;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 21vh;
+    height: 8vh;
+  }
 }
 .total__wrap {
   display: flex;
@@ -217,23 +314,41 @@ select:focus > option:checked {
   width: 95%;
   height: 9.6vh;
   resize: none;
-}
-.li__textarea__container {
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 84vw;
+    height: 15vh;
+  }
 }
 .next__step__button {
   width: 95%;
   display: flex;
   flex-direction: row-reverse;
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    display: block;
+  }
 }
 #size__control__preparing__button {
   margin-bottom: 0.2rem;
   width: 14vh;
   height: 5vh;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 12vw;
+    height: 5vw;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 30vw;
+    height: 13vw;
+  }
 }
 .submit__section__container {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   width: 50%;
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 92vw;
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 #size__control__submit__button {
   color: white;
@@ -244,5 +359,15 @@ select:focus > option:checked {
   &:hover {
     color: $primary__color;
     background-color: white;
+  }
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 12vw;
+    height: 6vw;
+    margin-bottom: 0.5rem;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 29vw;
+    height: 15vw;
+    margin-bottom: 0.5rem;
   }
 }

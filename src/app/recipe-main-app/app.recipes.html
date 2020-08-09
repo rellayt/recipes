@@ -1,22 +1,48 @@
-<div class="recipes-page-wrapper">
-  <div class="recipes-nav-wrapper">
-    <nav class="recipes-navbar">
-      <button (click)="intoHomePage()"><i class="fa fa-home"></i></button>
-      <ul class="hide">
-        <li class="nav-recipes-item">
-          <a href="#" (click)="intoAddPage()">Add recipe</a>
+<!-- Mobile menu section -->
+<div
+  *ngIf="!menuIcon"
+  [className]="!menuIcon ? 'recipes__mobile__wrapper__on' : 'recipes__mobile__wrapper__off'"
+>
+  <div class="mobile__nav">
+    <ul>
+      <li>
+        <a href="#" (click)="intoAddRecipePage()">Add recipe</a>
+      </li>
+      <li><a href="#">Sample 1</a></li>
+      <li><a href="#">Sample 2</a></li>
+      <li><a href="#">Sample 3</a></li>
+    </ul>
+  </div>
+</div>
+<!-- Main page -->
+<div class="recipes__page__wrapper">
+  <div class="recipes__nav__wrapper">
+    <nav class="recipes__navbar">
+      <div class="button__container">
+        <button (click)="intoHomePage()"><i class="fa fa-home"></i></button>
+      </div>
+      <ul>
+        <li class="nav__recipes__item">
+          <a href="#" (click)="intoAddRecipePage()">Add recipe</a>
         </li>
-        <li class="nav-recipes-item"><a href="#">Sample 1</a></li>
-        <li class="nav-recipes-item"><a href="#">Sample 2</a></li>
-        <li class="nav-recipes-item"><a href="#">Sample 3</a></li>
+        <li class="nav__recipes__item"><a href="#">Sample 1</a></li>
+        <li class="nav__recipes__item"><a href="#">Sample 2</a></li>
+        <li class="nav__recipes__item"><a href="#">Sample 3</a></li>
       </ul>
+      <div class="mobile__menu__container" (click)="toogleMenu()">
+        <div [className]="menuIcon ? 'mobile__menu' : 'mobile__menu__open'">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
     </nav>
   </div>
   <app-home *ngIf="homePage" (recipeIndex)="intoDetailsPage($event)"></app-home>
   <app-recipe-details
     *ngIf="detailsPage"
-    [currentRecipeIndex]="selectedRecipeId"
+    [selectedRecipeID]="selectedRecipeID"
     (intoHomePage)="intoHomePage()"
   ></app-recipe-details>
-  <app-recipe-adding *ngIf="addPage"></app-recipe-adding>
+  <app-recipe-adding *ngIf="addRecipePage"></app-recipe-adding>
 </div>

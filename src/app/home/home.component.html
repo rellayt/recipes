@@ -1,38 +1,47 @@
-<div class="home-recipes">
+<div class="home__recipes">
   <section class="headline">
     <span>Latest recipes</span>
   </section>
-  <section class="latest-recipes-images">
-    <div class="recipe-outter-container">
+  <section class="latest__recipes__images">
+    <div class="recipe__outter__container">
       <div
         (click)="getRecipeDetails(getRecipeIndex(0))"
-        class="new-recipe-img-container"
+        class="new__recipe__img__container"
       >
-        <img class="new-recipe-img-container" src="{{ getRecipeImage(0) }}" />
+        <img
+          class="new__recipe__img__container"
+          src="{{ getRecipeImage(0) }}"
+        />
       </div>
-      <span class="recipe-time">{{ getRecipeTime(0) }}</span>
-      <span class="recipe-title">{{ getRecipeTitle(0) }}</span>
+      <span class="recipe__time">{{ getRecipeTime(0) }}</span>
+      <span class="recipe__title">{{ getRecipeTitle(0) }}</span>
     </div>
 
-    <div class="recipe-outter-container">
+    <div class="recipe__outter__container">
       <div
         (click)="getRecipeDetails(getRecipeIndex(1))"
-        class="old-recipe-img-container"
+        class="old__recipe__img__container"
       >
-        <img class="old-recipe-img-container" src="{{ getRecipeImage(1) }}" />
+        <img
+          class="old__recipe__img__container"
+          src="{{ getRecipeImage(1) }}"
+        />
       </div>
-      <span class="recipe-time">{{ getRecipeTime(1) }}</span>
-      <span class="recipe-title">{{ getRecipeTitle(1) }}</span>
+      <span class="recipe__time">{{ getRecipeTime(1) }}</span>
+      <span class="recipe__title">{{ getRecipeTitle(1) }}</span>
     </div>
-    <div class="recipe-outter-container">
+    <div class="recipe__outter__container">
       <div
         (click)="getRecipeDetails(getRecipeIndex(2))"
-        class="old-recipe-img-container"
+        class="old__recipe__img__container"
       >
-        <img class="old-recipe-img-container" src="{{ getRecipeImage(2) }}" />
+        <img
+          class="old__recipe__img__container"
+          src="{{ getRecipeImage(2) }}"
+        />
       </div>
-      <span class="recipe-time">{{ getRecipeTime(2) }}</span>
-      <span class="recipe-title">{{ getRecipeTitle(2) }}</span>
+      <span class="recipe__time">{{ getRecipeTime(2) }}</span>
+      <span class="recipe__title">{{ getRecipeTitle(2) }}</span>
     </div>
   </section>
 </div>

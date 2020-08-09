@@ -7,20 +7,27 @@ import { Component } from '@angular/core';
 })
 export class AppRecipes {
 
+  // Conditional variables which allow to go to other pages
   homePage = true;
   detailsPage = false;
-  addPage = false;
+  addRecipePage = false;
 
-  selectedRecipeId: number;
-  title = 'Recipes';
+  // Variable represents the id of the selected recipe to be
+  // displayed on detailsPage
+  selectedRecipeID: number;
 
+  // Variable allows to interact with mobile menu icon
+  menuIcon = true;
+
+  // Methods responsible for moving around the pages
   intoHomePage() {
     this.homePage = true;
     this.detailsPage = false;
-    this.addPage = false;
+    this.addRecipePage = false;
   }
-  intoAddPage() {
-    this.addPage = true;
+
+  intoAddRecipePage() {
+    this.addRecipePage = true;
     this.homePage = false;
     this.detailsPage = false;
   }
@@ -28,8 +35,12 @@ export class AppRecipes {
   intoDetailsPage(recipeIndex: number) {
     this.detailsPage = true;
     this.homePage = false;
-    this.addPage = false;
-    this.selectedRecipeId = recipeIndex;
+    this.addRecipePage = false;
+    this.selectedRecipeID = recipeIndex;
   }
 
+  // Method responsible for interact with mobile menu icon
+  toogleMenu() {
+    this.menuIcon = !this.menuIcon;
+  }
 }
