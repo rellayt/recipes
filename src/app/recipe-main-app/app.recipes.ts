@@ -31,4 +31,5 @@ export class AppRecipes {
     this.addPage = false;
     this.selectedRecipeId = recipeIndex;
   }
+
 }

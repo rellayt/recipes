@@ -2,11 +2,12 @@
   <div class="recipe-wrapper">
     <div class="recipe-image-container">
       <div class="recipe-image">
+        <div class="recipe-image-fade"></div>
         <img class="recipe-image" src="{{ getRecipeImage() }}" />
-      </div>
-      <div class="recipe-title-timer-wrapper">
-        <span class="recipe-details-time">{{ getRecipeTime() }}</span>
-        <span class="recipe-details-title">{{ getRecipeTitle() }}</span>
+        <div class="recipe-title-timer-wrapper">
+          <span class="recipe-details-time">{{ getRecipeTime() }}</span>
+          <span class="recipe-details-title">{{ getRecipeTitle() }}</span>
+        </div>
       </div>
     </div>
     <div class="recipe-desc-preparing-wrapper">
@@ -25,10 +26,12 @@
   <div class="recipe-wrapper-2">
     <div class="button-outter-container">
       <div class="button-container">
-        <button type="button" class="btn btn-primary">Edit</button>
+        <button type="button" class="btn btn-primary" disabled>Edit</button>
       </div>
       <div class="button-container">
-        <button type="button" class="btn btn-primary">Delete</button>
+        <button type="button" class="btn btn-primary" (click)="deleteRecipe()">
+          Delete
+        </button>
       </div>
     </div>
     <div class="ingredients-title">Ingredients</div>

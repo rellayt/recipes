@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { recipeIngredientService } from '../services/recipe.ingredient.service';
 import { recipePreparingService } from '../services/recipe.preparing.service';
 import { recipeService } from '../services/recipe.service';
 import { recipeData, recipeIngredientsData, recipePreparingData } from '../recipeData';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-recipe-details',
@@ -13,6 +12,9 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class RecipeDetailsComponent implements OnInit {
   @Input()
   currentRecipeIndex: number;
+
+  @Output()
+  intoHomePage: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   recipe: recipeData;
   recipeIngredients: recipeIngredientsData[];
@@ -58,5 +60,11 @@ export class RecipeDetailsComponent implements OnInit {
     if (this.recipe) {
       return this.recipe.description;
     }
+  }
+  deleteRecipe = () => {
+    this.intoHomePage.emit(true);
+    this.recipeService.deleteRecipe(this.recipe);
+    this.recipeIngredientService.deleteRecipeIngredient(this.recipeIngredients);
+    this.recipePreparingService.deleteRecipePreparing(this.recipePreparings);
   }
 }

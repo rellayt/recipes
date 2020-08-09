@@ -29,4 +29,10 @@ export class recipePreparingService {
   addRecipePreparing(recipePreparing: recipePreparingData) {
     this.recipePreparingCollection.add(JSON.parse(JSON.stringify(recipePreparing)));
   }
+  deleteRecipePreparing(recipePreparing: recipePreparingData[]) {
+    for (const prepare of recipePreparing) {
+      const res = this.afs.collection('recipePreparing').doc(`${prepare.idSource}`);
+      res.delete();
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Component } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators";
@@ -26,7 +26,11 @@ export class recipeService {
   getRecipes() {
     return this.recipes;
   }
-  addRecipe(recipes: recipeData) {
-    this.recipesCollection.add(JSON.parse(JSON.stringify(recipes)));
+  addRecipe(recipe: recipeData) {
+    this.recipesCollection.add(JSON.parse(JSON.stringify(recipe)));
+  }
+  deleteRecipe(recipe: recipeData) {
+    const res = this.afs.collection('recipes').doc(`${recipe.idSource}`);
+    res.delete();
   }
 }

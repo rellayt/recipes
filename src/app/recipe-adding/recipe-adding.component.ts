@@ -93,17 +93,19 @@ export class RecipeAddingComponent implements OnInit {
       this.recipeToAdd.title = this.titleInput;
       this.recipeToAdd.time = recipeTime;
       this.recipeToAdd.description = this.descriptionInput;
-      for (let i = 0; i < this.preparing.length; i++) {
-        this.recipePreparingToAdd.recipeId = this.recipeMaxIndex + 1;
-        this.recipePreparingToAdd.stepNumber = this.preparing[i].stepNumber;
-        this.recipePreparingToAdd.step = this.preparing[i].stepName;
+
+      this.recipePreparingToAdd.recipeId = this.recipeMaxIndex + 1;
+      this.recipeIngredientToAdd.recipeId = this.recipeMaxIndex + 1;
+
+      for (const prepare of this.preparing) {
+        this.recipePreparingToAdd.stepNumber = prepare.stepNumber;
+        this.recipePreparingToAdd.step = prepare.stepName;
         this.recipePreparingService.addRecipePreparing(this.recipePreparingToAdd);
         // console.log('step nr:', this.preparing[i].stepNumber, 'step name: ', this.preparing[i].stepName);
       }
-      for (let i = 0; i < this.ingredients.length; i++) {
-        this.recipeIngredientToAdd.recipeId = this.recipeMaxIndex + 1;
-        this.recipeIngredientToAdd.ingredient = this.ingredients[i].name;
-        this.recipeIngredientToAdd.quantity = this.ingredients[i].quantity;
+      for (const ingredient of this.ingredients) {
+        this.recipeIngredientToAdd.ingredient = ingredient.name;
+        this.recipeIngredientToAdd.quantity = ingredient.quantity;
         this.recipeIngredientService.addRecipeIngredient(this.recipeIngredientToAdd);
         // console.log('quantity', this.ingredients[i].quantity, 'ing name: ', this.ingredients[i].name)
       }

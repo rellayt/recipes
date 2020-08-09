@@ -16,6 +16,7 @@
   <app-recipe-details
     *ngIf="detailsPage"
     [currentRecipeIndex]="selectedRecipeId"
+    (intoHomePage)="intoHomePage()"
   ></app-recipe-details>
   <app-recipe-adding *ngIf="addPage"></app-recipe-adding>
 </div>

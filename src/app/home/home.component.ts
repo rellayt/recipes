@@ -30,15 +30,36 @@ export class HomeComponent implements OnInit {
   }
 
   getLatestRecipes() {
-    const maxRecipeID = this.recipes.reduce((a, b) => a.recipeId > b.recipeId ? a : b).recipeId;
+    let recipeNextRef = [...this.recipes];
+
+    const firstMaxRecipeID = this.recipes.reduce((a, b) => a.recipeId > b.recipeId ? a : b).recipeId;
+    this.removeElementByRecipeId(recipeNextRef, firstMaxRecipeID);
+
+    const secondMaxRecipeID = recipeNextRef.reduce((a, b) => a.recipeId > b.recipeId ? a : b).recipeId;
+    this.removeElementByRecipeId(recipeNextRef, secondMaxRecipeID);
+
+    const thirdMaxRecipeID = recipeNextRef.reduce((a, b) => a.recipeId > b.recipeId ? a : b).recipeId;
+
+    const firstRecipe = this.recipes.find(x => x.recipeId === firstMaxRecipeID);
+    const secondRecipe = this.recipes.find(x => x.recipeId === secondMaxRecipeID);
+    const thirdRecipe = this.recipes.find(x => x.recipeId === thirdMaxRecipeID);
+
     this.latestRecipes = [];
-    if (maxRecipeID >= 2) {
-      this.latestRecipes.push(this.recipes[maxRecipeID]);
-      this.latestRecipes.push(this.recipes[maxRecipeID - 1]);
-      this.latestRecipes.push(this.recipes[maxRecipeID - 2]);
+
+    if (firstMaxRecipeID >= 2) {
+      this.latestRecipes.push(firstRecipe);
+      this.latestRecipes.push(secondRecipe);
+      this.latestRecipes.push(thirdRecipe);
     }
   }
-
+  removeElementByRecipeId(recipeArray: recipeData[], recipeId: number) {
+    for (let i = 0; i < recipeArray.length; i++) {
+      if (recipeArray[i].recipeId === recipeId) {
+        recipeArray.splice(i, 1);
+        break;
+      }
+    }
+  }
   getRecipeImage(index: number): string {
     if (this.latestRecipes) {
       return this.latestRecipes[index].image;
@@ -59,4 +80,6 @@ export class HomeComponent implements OnInit {
       return this.latestRecipes[index].recipeId;
     }
   }
+
+
 }

@@ -29,4 +29,10 @@ export class recipeIngredientService {
   addRecipeIngredient(recipeIngredients: recipeIngredientsData) {
     this.recipeIngredientsCollection.add(JSON.parse(JSON.stringify(recipeIngredients)));
   }
+  deleteRecipeIngredient(recipeIngredient: recipeIngredientsData[]) {
+    for (const ingredient of recipeIngredient) {
+      const res = this.afs.collection('recipeIngredients').doc(`${ingredient.idSource}`);
+      res.delete();
+    }
+  }
 }
