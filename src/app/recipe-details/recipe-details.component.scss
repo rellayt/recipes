@@ -178,7 +178,7 @@ $primary__color: #ffbb00;
   }
   @media (min-device-width: 320px) and (max-device-width: 420px) {
     align-self: flex-start;
-    margin-left: -9px;
+    margin-left: -10px;
     margin-bottom: 7px;
   }
 }
@@ -241,6 +241,7 @@ $primary__color: #ffbb00;
   @media (min-device-width: 768px) and (max-device-width: 1112px) {
     width: 100%;
     align-items: center;
+    margin-top: 7px;
   }
   @media (min-device-width: 320px) and (max-device-width: 420px) {
     width: 95%;

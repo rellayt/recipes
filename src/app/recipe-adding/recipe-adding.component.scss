@@ -156,7 +156,7 @@ option:hover {
     width: 7rem;
   }
   @media (min-device-width: 320px) and (max-device-width: 420px) {
-    width: 7rem;
+    width: 7.3rem;
   }
 }
 .basic__info__ingredients__wrapper {
@@ -264,7 +264,7 @@ select:focus > option:checked {
     margin-right: 2.5rem;
   }
   @media (min-device-width: 320px) and (max-device-width: 420px) {
-    margin-right: 2.5rem;
+    margin-right: 2.8rem;
   }
 }
 #size__control__quantity__input {
@@ -274,11 +274,11 @@ select:focus > option:checked {
   width: 12rem;
 }
 .add__next__ingredient__button {
-  width: 36vh;
+  width: 34vh;
   display: flex;
   flex-direction: row-reverse;
   @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    width: 57vh;
+    width: 53.5vh;
   }
   @media (min-device-width: 320px) and (max-device-width: 420px) {
     flex-direction: row;
@@ -332,8 +332,8 @@ select:focus > option:checked {
   width: 14vh;
   height: 5vh;
   @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    width: 12vw;
-    height: 5vw;
+    width: 15vw;
+    height: 6vw;
   }
   @media (min-device-width: 320px) and (max-device-width: 420px) {
     width: 30vw;
@@ -361,8 +361,8 @@ select:focus > option:checked {
     background-color: white;
   }
   @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    width: 12vw;
-    height: 6vw;
+    width: 15vw;
+    height: 7vw;
     margin-bottom: 0.5rem;
   }
   @media (min-device-width: 320px) and (max-device-width: 420px) {
