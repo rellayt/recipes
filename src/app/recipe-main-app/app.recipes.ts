@@ -24,18 +24,21 @@ export class AppRecipes {
     this.homePage = true;
     this.detailsPage = false;
     this.addRecipePage = false;
+    this.menuIcon = true;
   }
 
   intoAddRecipePage() {
     this.addRecipePage = true;
     this.homePage = false;
     this.detailsPage = false;
+    this.menuIcon = true;
   }
 
   intoDetailsPage(recipeIndex: number) {
     this.detailsPage = true;
     this.homePage = false;
     this.addRecipePage = false;
+    this.menuIcon = true;
     this.selectedRecipeID = recipeIndex;
   }
 

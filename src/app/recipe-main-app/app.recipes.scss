@@ -19,6 +19,9 @@ $primary__color: #ffbb00;
   display: flex;
   align-items: center;
   overflow: hidden;
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 100vw;
+  }
 }
 .button__container {
   margin: 2% 0 2% 20.5vw;
