@@ -1,47 +1,47 @@
-<div class="add__recipe__wrapper">
-  <section class="upper__headline">
+<div class="AddRecipeWrapper">
+  <section class="UpperHeadline">
     <span>Add recipe</span>
   </section>
-  <section class="bottom__headline">
-    <span class="bottom__text">Basic information</span>
-    <span *ngIf="!mobileMode" class="bottom__text__ing">Ingredients</span>
+  <section class="BottomHeadline">
+    <span class="BottomText">Basic information</span>
+    <span *ngIf="!mobileMode" class="BottomTextIng">Ingredients</span>
   </section>
-  <div class="total__wrap">
-    <div class="info__ingredients__wrapper">
-      <div class="basic__info__wrapper">
+  <div class="TotalWrap">
+    <div class="InfoIngredientsWrapper">
+      <div class="BasicInfoWrapper">
         <form>
-          <div class="title__time__type__container">
-            <div class="small__object__wrapper">
+          <div class="TitleTimeTypeContainer">
+            <div class="SmallObjectWrapper">
               <label>Title</label>
               <input
                 type="text"
                 class="form-control"
-                id="size__control__title"
+                id="SizeControlTitle"
                 [(ngModel)]="titleInput"
                 [ngModelOptions]="{ standalone: true }"
               />
             </div>
-            <div class="time__type__wrapper">
-              <div class="small__object__wrapper">
+            <div class="TimeTypeWrapper">
+              <div class="SmallObjectWrapper">
                 <label>Time</label>
                 <input
                   type="number"
                   min="0"
                   class="form-control"
-                  id="size__control__time"
+                  id="SizeControlTime"
                   [(ngModel)]="timeInput"
                   [ngModelOptions]="{ standalone: true }"
                 />
               </div>
-              <div class="type__wrapper">
+              <div class="TypeWrapper">
                 <select
                   class="form-control"
-                  id="size__control__type"
+                  id="SizeControlType"
                   [(ngModel)]="selectedLevel"
                   [ngModelOptions]="{ standalone: true }"
                 >
                   <option
-                    class="option__container"
+                    class="OptionContainer"
                     *ngFor="let type of selectTimeType"
                     [ngValue]="type"
                     >{{ type.value }}</option
@@ -52,7 +52,7 @@
           </div>
         </form>
 
-        <div class="textarea__container">
+        <div class="TextareaContainer">
           <label>Description</label>
           <textarea
             [(ngModel)]="descriptionInput"
@@ -74,43 +74,43 @@
             style="display: none;"
           />
         </button>
-        <div class="recipe__uploaded__image__container" *ngIf="imageUploaded">
+        <div class="RecipeUploadedImageContainer" *ngIf="imageUploaded">
           <span>Uploaded image</span>
           <img src="{{ getRecipeUploadedImage() }}" />
         </div>
       </div>
-      <div class="ingredients__wrapper">
-        <span *ngIf="mobileMode" class="bottom__text__ing">Ingredients</span>
+      <div class="IngredientsWrapper">
+        <span *ngIf="mobileMode" class="BottomTextIng">Ingredients</span>
 
-        <div class="quantity__name__wrapper">
-          <span class="quantity__container">Quantity</span>
-          <span class="ingrendient__name__container">Name</span>
+        <div class="QuantityNameWrapper">
+          <span class="QuantityContainer">Quantity</span>
+          <span class="IngrendientNameContainer">Name</span>
         </div>
         <div
           *ngFor="let ingredient of ingredients; let i = index"
-          class="quantity__name__inputs_wrapper"
+          class="QuantityNameInputs_Wrapper"
         >
-          <div class="quantity__input__container">
+          <div class="QuantityInputContainer">
             <input
               type="text"
               class="form-control"
-              id="size__control__quantity__input"
+              id="SizeControlQuantityInput"
               [(ngModel)]="ingredients[i].quantity"
             />
           </div>
-          <div class="ingredient__name__input__container">
+          <div class="IngredientNameInputContainer">
             <input
               type="text"
               class="form-control"
-              id="size__control__name__input"
+              id="SizeControlNameInput"
               [(ngModel)]="ingredients[i].name"
             />
           </div>
         </div>
-        <div class="add__next__ingredient__button">
+        <div class="AddNextIngredientButton">
           <button
             type="button"
-            id="size__control__ingredient__button"
+            id="SizeControlIngredientButton"
             class="btn btn-primary"
             (click)="addIngredient()"
           >
@@ -119,27 +119,27 @@
         </div>
       </div>
     </div>
-    <div class="preparing__wrapper">
-      <div class="bottom__text__last">Preparing</div>
+    <div class="PreparingWrapper">
+      <div class="BottomTextLast">Preparing</div>
       <div>
         <ul>
           <li
             *ngFor="let step of preparing; let i = index"
-            class="step__container"
+            class="StepContainer"
           >
             <textarea
               class="form-control"
-              id="size__control__step__input"
+              id="SizeControlStepInput"
               [(ngModel)]="preparing[i].stepName"
               rows="3"
             ></textarea>
           </li>
         </ul>
       </div>
-      <div class="next__step__button">
+      <div class="NextStepButton">
         <button
           type="button"
-          id="size__control__preparing__button"
+          id="SizeControlPreparingButton"
           class="btn btn-primary"
           (click)="addStep(preparing.length)"
         >
@@ -147,11 +147,11 @@
         </button>
       </div>
     </div>
-    <section class="submit__section__container">
+    <section class="SubmitSectionContainer">
       <div *ngIf="!mobileMode" class="col text-center">
         <button
           type="button"
-          id="size__control__submit__button"
+          id="SizeControlSubmitButton"
           class="btn btn-primary"
           (click)="addRecipe()"
         >
@@ -161,7 +161,7 @@
       <button
         *ngIf="mobileMode"
         type="button"
-        id="size__control__submit__button"
+        id="SizeControlSubmitButton"
         class="btn btn-primary"
         (click)="addRecipe()"
       >

@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators";
-import { recipeIngredientsData } from '../recipeData';
+import { RecipeIngredientsData } from '../recipeData';
 
 @Injectable({
   providedIn: 'root'
 })
 export class recipeIngredientService {
-  recipeIngredientsCollection: AngularFirestoreCollection<recipeIngredientsData>;
-  recipeIngredients: Observable<recipeIngredientsData[]>;
-  recipeIngredientsDoc: AngularFirestoreDocument<recipeIngredientsData>;
+  recipeIngredientsCollection: AngularFirestoreCollection<RecipeIngredientsData>;
+  recipeIngredients: Observable<RecipeIngredientsData[]>;
+  recipeIngredientsDoc: AngularFirestoreDocument<RecipeIngredientsData>;
 
   constructor(public afs: AngularFirestore) {
     this.recipeIngredientsCollection = this.afs.collection('recipeIngredients', ref => ref.orderBy('recipeId', 'asc'));
 
     this.recipeIngredients = this.recipeIngredientsCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
-        const data = a.payload.doc.data() as recipeIngredientsData;
+        const data = a.payload.doc.data() as RecipeIngredientsData;
         data.idSource = a.payload.doc.id;
         return data;
       });
@@ -26,10 +26,10 @@ export class recipeIngredientService {
   getRecipeIngredients() {
     return this.recipeIngredients;
   }
-  addRecipeIngredient(recipeIngredients: recipeIngredientsData) {
+  addRecipeIngredient(recipeIngredients: RecipeIngredientsData) {
     this.recipeIngredientsCollection.add(JSON.parse(JSON.stringify(recipeIngredients)));
   }
-  deleteRecipeIngredient(recipeIngredient: recipeIngredientsData[]) {
+  deleteRecipeIngredient(recipeIngredient: RecipeIngredientsData[]) {
     for (const ingredient of recipeIngredient) {
       const res = this.afs.collection('recipeIngredients').doc(`${ingredient.idSource}`);
       res.delete();

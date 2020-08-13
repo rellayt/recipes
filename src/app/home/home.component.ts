@@ -1,5 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { recipeData } from '../recipeData';
+import { RecipeData } from '../recipeData';
 import { recipeService } from '../services/recipe.service';
 import { imageService } from '../services/image.service';
 import { EventEmitter } from '@angular/core';
@@ -14,8 +14,8 @@ export class HomeComponent implements OnInit {
   @Output()
   recipeIndex: EventEmitter<number> = new EventEmitter<number>();
 
-  recipes: recipeData[];
-  latestRecipes: recipeData[];
+  recipes: RecipeData[];
+  latestRecipes: RecipeData[];
 
   constructor(public recipeService: recipeService, public images: imageService) { }
 
@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  removeElementByRecipeId(recipeArray: recipeData[], recipeId: number) {
+  removeElementByRecipeId(recipeArray: RecipeData[], recipeId: number) {
     for (let i = 0; i < recipeArray.length; i++) {
       if (recipeArray[i].recipeId === recipeId) {
         recipeArray.splice(i, 1);

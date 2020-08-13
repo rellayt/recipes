@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { recipeIngredientService } from '../services/recipe.ingredient.service';
 import { recipePreparingService } from '../services/recipe.preparing.service';
 import { recipeService } from '../services/recipe.service';
-import { recipeData, recipeIngredientsData, recipePreparingData } from '../recipeData';
+import { RecipeData, RecipeIngredientsData, RecipePreparingData } from '../recipeData';
 
 @Component({
   selector: 'app-recipe-details',
@@ -19,9 +19,9 @@ export class RecipeDetailsComponent implements OnInit {
   intoHomePage: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   // Variables that store data from firebase
-  recipe: recipeData;
-  recipeIngredients: recipeIngredientsData[];
-  recipePreparings: recipePreparingData[];
+  recipe: RecipeData;
+  recipeIngredients: RecipeIngredientsData[];
+  recipePreparings: RecipePreparingData[];
 
   constructor(public recipeService: recipeService, public recipeIngredientService: recipeIngredientService, public recipePreparingService: recipePreparingService) { }
 

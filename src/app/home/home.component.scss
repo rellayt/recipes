@@ -1,4 +1,4 @@
-.headline {
+.Headline {
   width: auto;
   margin: 2% 20.5rem 2% 0;
   display: flex;
@@ -11,12 +11,12 @@
   }
 }
 
-.headline span {
+.Headline span {
   width: 50rem;
   font-size: 25px;
   font-weight: 600;
 }
-.latest__recipes__images {
+.LatestRecipesImages {
   margin: 2%;
   display: flex;
   justify-content: center;
@@ -30,7 +30,7 @@
     margin: 1%;
   }
 }
-.new__recipe__img__container {
+.NewRecipeImgContainer {
   border-radius: 2%;
   width: 25rem;
   height: 30rem;
@@ -48,7 +48,7 @@
     margin-bottom: 1.15rem;
   }
 }
-.new__recipe__img__container::after {
+.NewRecipeImgContainer::after {
   position: absolute;
   background-image: linear-gradient(
     360deg,
@@ -71,8 +71,8 @@
   }
 }
 
-.old__recipe__img__container {
-  @extend .new__recipe__img__container;
+.OldRecipeImgContainer {
+  @extend .NewRecipeImgContainer;
   width: 22rem;
   @media (min-device-width: 768px) and (max-device-width: 1112px) {
     width: 15rem;
@@ -82,8 +82,8 @@
   }
 }
 
-.old__recipe__img__container::after {
-  @extend .new__recipe__img__container;
+.OldRecipeImgContainer::after {
+  @extend .NewRecipeImgContainer;
   width: 22rem;
   @media (min-device-width: 768px) and (max-device-width: 1112px) {
     width: 15rem;
@@ -93,13 +93,13 @@
   }
 }
 
-.home__recipes {
+.HomeRecipes {
   height: 75vh;
 }
-.latest__recipes__images > div {
+.LatestRecipesImages > div {
   margin: 0 3px;
 }
-.recipe__outter__container {
+.RecipeOutterContainer {
   position: relative;
   display: inline-block;
   opacity: 1;
@@ -110,7 +110,7 @@
     opacity: 0.8;
   }
 }
-.recipe__time {
+.RecipeTime {
   position: absolute;
   bottom: 49px;
   margin-left: 3vh;
@@ -122,7 +122,7 @@
     bottom: 61px;
   }
 }
-.recipe__title {
+.RecipeTitle {
   position: absolute;
   bottom: 19px;
   margin-left: 3vh;

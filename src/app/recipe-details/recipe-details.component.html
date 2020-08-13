@@ -1,23 +1,23 @@
-<div class="recipe__details__wrapper">
-  <div class="recipe__wrapper">
-    <div class="recipe__img__desc__ing__wrapper">
-      <div class="recipe__image__desc__container">
-        <div class="recipe__image">
-          <div class="recipe__image__fade"></div>
-          <img class="recipe__image" src="{{ getRecipeImage() }}" />
-          <div class="recipe__title__timer__wrapper">
-            <span class="recipe__details__time">{{ getRecipeTime() }}</span>
-            <span class="recipe__details__title">{{ getRecipeTitle() }}</span>
+<div class="RecipeDetailsWrapper">
+  <div class="RecipeWrapper">
+    <div class="RecipeImgDescIngWrapper">
+      <div class="RecipeImageDescContainer">
+        <div class="RecipeImage">
+          <div class="RecipeImageFade"></div>
+          <img class="RecipeImage" src="{{ getRecipeImage() }}" />
+          <div class="RecipeTitleTimerWrapper">
+            <span class="RecipeDetailsTime">{{ getRecipeTime() }}</span>
+            <span class="RecipeDetailsTitle">{{ getRecipeTitle() }}</span>
           </div>
         </div>
-        <div class="recipe__desc__container">{{ getRecipeDescription() }}</div>
+        <div class="RecipeDescContainer">{{ getRecipeDescription() }}</div>
       </div>
-      <div class="ingredients__container">
-        <div class="button__outter__container">
-          <div class="button__container">
+      <div class="IngredientsContainer">
+        <div class="ButtonOutterContainer">
+          <div class="ButtonContainer">
             <button type="button" class="btn btn-primary" disabled>Edit</button>
           </div>
-          <div class="button__container">
+          <div class="ButtonContainer">
             <button
               type="button"
               class="btn btn-primary"
@@ -28,13 +28,13 @@
           </div>
         </div>
 
-        <div class="ingredients__title">Ingredients</div>
+        <div class="IngredientsTitle">Ingredients</div>
         <ng-container *ngFor="let ingredient of recipeIngredients">
           <ul>
-            <div class="quantity__ingredient__wrapper">
-              <li class="quantity__ingredient__container">
-                <div class="quantity__container">{{ ingredient.quantity }}</div>
-                <div class="ingredient__container">
+            <div class="QuantityIngredientWrapper">
+              <li class="QuantityIngredientContainer">
+                <div class="QuantityContainer">{{ ingredient.quantity }}</div>
+                <div class="IngredientContainer">
                   {{ ingredient.ingredient }}
                 </div>
               </li>
@@ -43,12 +43,12 @@
         </ng-container>
       </div>
     </div>
-    <div class="recipe__preparing__wrapper">
-      <div class="preparing__title">Preparing</div>
+    <div class="RecipePreparingWrapper">
+      <div class="PreparingTitle">Preparing</div>
       <ul>
         <li
           *ngFor="let preparing of recipePreparings"
-          class="recipe__preparing__container"
+          class="RecipePreparingContainer"
         >
           {{ preparing.step }}
         </li>

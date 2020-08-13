@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { recipeData, recipeIngredientsData, recipePreparingData } from '../recipeData';
+import { RecipeData, RecipeIngredientsData, RecipePreparingData } from '../recipeData';
 import { recipeIngredientService } from '../services/recipe.ingredient.service';
 import { recipePreparingService } from '../services/recipe.preparing.service';
 import { recipeService } from '../services/recipe.service';
@@ -24,12 +24,12 @@ export class RecipeAddingComponent implements OnInit {
   recipeMaxIndex = 0;
 
   // Variable that store data from firebase
-  recipes: recipeData[];
+  recipes: RecipeData[];
 
   // Variables used to finally add data to the firebase
-  recipeToAdd: recipeData = { description: '', title: '', time: '', recipeId: 1, image: '' };
-  recipeIngredientToAdd: recipeIngredientsData = { recipeId: 0, quantity: '', ingredient: '' };
-  recipePreparingToAdd: recipePreparingData = { recipeId: 0, step: '', stepNumber: 1 };
+  recipeToAdd: RecipeData = { description: '', title: '', time: '', recipeId: 1, image: '' };
+  recipeIngredientToAdd: RecipeIngredientsData = { recipeId: 0, quantity: '', ingredient: '' };
+  recipePreparingToAdd: RecipePreparingData = { recipeId: 0, step: '', stepNumber: 1 };
 
   // Input variables
   titleInput = '';

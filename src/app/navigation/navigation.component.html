@@ -1,0 +1,42 @@
+<!-- Mobile menu section -->
+<div
+  *ngIf="!menuIcon"
+  [className]="!menuIcon ? 'RecipesMobileWrapperOn' : 'RecipesMobileWrapperOff'"
+>
+  <div class="MobileNav">
+    <ul>
+      <li>
+        <a href="#" (click)="intoAddRecipePage()">Add recipe</a>
+      </li>
+      <li><a href="#">Sample 1</a></li>
+      <li><a href="#">Sample 2</a></li>
+      <li><a href="#">Sample 3</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Main page -->
+<div class="RecipesPageWrapper">
+  <div class="RecipesNavWrapper">
+    <nav class="RecipesNavbar">
+      <div class="ButtonContainer">
+        <button (click)="intoHomePage()"><i class="fa fa-home"></i></button>
+      </div>
+      <ul>
+        <li class="NavRecipesItem">
+          <a href="#" (click)="intoAddRecipePage()">Add recipe</a>
+        </li>
+        <li class="NavRecipesItem"><a href="#">Sample 1</a></li>
+        <li class="NavRecipesItem"><a href="#">Sample 2</a></li>
+        <li class="NavRecipesItem"><a href="#">Sample 3</a></li>
+      </ul>
+      <div class="MobileMenuContainer" (click)="toogleMenu()">
+        <div [className]="menuIcon ? 'MobileMenu' : 'MobileMenuOpen'">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
