@@ -4,13 +4,13 @@
       <div class="RecipeImageDescContainer">
         <div class="RecipeImage">
           <div class="RecipeImageFade"></div>
-          <img class="RecipeImage" src="{{ getRecipeImage() }}" />
+          <img class="RecipeImage" src="{{ recipe?.image }}" />
           <div class="RecipeTitleTimerWrapper">
-            <span class="RecipeDetailsTime">{{ getRecipeTime() }}</span>
-            <span class="RecipeDetailsTitle">{{ getRecipeTitle() }}</span>
+            <span class="RecipeDetailsTime">{{ recipe?.time }}</span>
+            <span class="RecipeDetailsTitle">{{ recipe?.title }}</span>
           </div>
         </div>
-        <div class="RecipeDescContainer">{{ getRecipeDescription() }}</div>
+        <div class="RecipeDescContainer">{{ recipe?.description }}</div>
       </div>
       <div class="IngredientsContainer">
         <div class="ButtonOutterContainer">
@@ -21,6 +21,7 @@
             <button
               type="button"
               class="btn btn-primary"
+              routerLink="/home"
               (click)="deleteRecipe()"
             >
               Delete

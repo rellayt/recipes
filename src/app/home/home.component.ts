@@ -3,6 +3,8 @@ import { RecipeData } from '../recipeData';
 import { recipeService } from '../services/recipe.service';
 import { imageService } from '../services/image.service';
 import { EventEmitter } from '@angular/core';
+import { RecipeDataService } from '../services/recipe.data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,16 +19,24 @@ export class HomeComponent implements OnInit {
   recipes: RecipeData[];
   latestRecipes: RecipeData[];
 
-  constructor(public recipeService: recipeService, public images: imageService) { }
+  // tslint:disable-next-line: max-line-length
+  constructor(public router: Router, public recipeDataService: RecipeDataService, public RecipeService: recipeService, public images: imageService) { }
 
   ngOnInit(): void {
-    // Calling method that allow data to be received from firebase
-    this.recipeService.getRecipes().subscribe(recipes => {
-      this.recipes = recipes;
-      this.getLatestRecipes();
-    });
+    try {
+      this.recipeDataService.recipeChangingData.subscribe(recipes => {
+        this.recipes = recipes;
+        if (this.recipes.length > 0) {
+          this.getLatestRecipes();
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
-
+  onSelect(id: number) {
+    this.router.navigate(['/details', id]);
+  }
   // Emitting the selected recipe ID
   getRecipeDetails(recipeIndex: number) {
     this.recipeIndex.emit(recipeIndex);
@@ -65,28 +75,6 @@ export class HomeComponent implements OnInit {
         recipeArray.splice(i, 1);
         break;
       }
-    }
-  }
-
-  // Methods which allows to get recipe parameters
-  getRecipeImage(index: number): string {
-    if (this.latestRecipes) {
-      return this.latestRecipes[index].image;
-    }
-  }
-  getRecipeTime(index: number): string {
-    if (this.latestRecipes) {
-      return this.latestRecipes[index].time;
-    }
-  }
-  getRecipeTitle(index: number): string {
-    if (this.latestRecipes) {
-      return this.latestRecipes[index].title;
-    }
-  }
-  getRecipeIndex(index: number): number {
-    if (this.latestRecipes) {
-      return this.latestRecipes[index].recipeId;
     }
   }
 }

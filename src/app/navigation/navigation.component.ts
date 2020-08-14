@@ -7,16 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
+  menuIcon = true;
 
   // Variable represents the id of the selected recipe to be
   // displayed on detailsPage
   selectedRecipeID: number;
-
-  // Variable allows to interact with mobile menu icon
-  menuIcon = true;
-
-  // Methods responsible for moving around the pages
-
 
   // Method responsible for interact with mobile menu icon
   toogleMenu() {

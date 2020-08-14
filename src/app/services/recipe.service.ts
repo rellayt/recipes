@@ -3,6 +3,7 @@ import { AngularFirestoreCollection, AngularFirestoreDocument, AngularFirestore 
 import { Observable } from 'rxjs';
 import { map } from "rxjs/operators";
 import { RecipeData } from '../recipeData';
+import { RecipeDataService } from './recipe.data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class recipeService {
   recipes: Observable<RecipeData[]>;
   recipesDoc: AngularFirestoreDocument<RecipeData>;
 
-  constructor(public afs: AngularFirestore) {
+  constructor(public afs: AngularFirestore, public recipeDataService: RecipeDataService) {
     this.recipesCollection = this.afs.collection('recipes', ref => ref.orderBy('recipeId', 'asc'));
 
     this.recipes = this.recipesCollection.snapshotChanges().pipe(map(changes => {
@@ -22,6 +23,9 @@ export class recipeService {
         return data;
       });
     }));
+    this.recipes.subscribe(recipes => {
+      this.recipeDataService.changeRecipeData(recipes);
+    });
   }
   getRecipes() {
     return this.recipes;

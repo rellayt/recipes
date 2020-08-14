@@ -6,7 +6,7 @@
   <div class="MobileNav">
     <ul>
       <li>
-        <a href="#" (click)="intoAddRecipePage()">Add recipe</a>
+        <a href="#" routerLink="/add-recipe">Add recipe</a>
       </li>
       <li><a href="#">Sample 1</a></li>
       <li><a href="#">Sample 2</a></li>
@@ -20,11 +20,11 @@
   <div class="RecipesNavWrapper">
     <nav class="RecipesNavbar">
       <div class="ButtonContainer">
-        <button (click)="intoHomePage()"><i class="fa fa-home"></i></button>
+        <button routerLink="/home"><i class="fa fa-home"></i></button>
       </div>
       <ul>
         <li class="NavRecipesItem">
-          <a href="#" (click)="intoAddRecipePage()">Add recipe</a>
+          <a href="#" routerLink="/add-recipe">Add recipe</a>
         </li>
         <li class="NavRecipesItem"><a href="#">Sample 1</a></li>
         <li class="NavRecipesItem"><a href="#">Sample 2</a></li>

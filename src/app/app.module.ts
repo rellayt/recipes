@@ -11,14 +11,13 @@ import { recipeIngredientService } from './services/recipe.ingredient.service';
 import { recipePreparingService } from './services/recipe.preparing.service';
 import { imageService } from './services/image.service';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { RecipeAddingComponent } from './recipe-adding/recipe-adding.component';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { NavigationComponent } from './navigation/navigation.component';
+import { RecipeDataService } from './services/recipe.data.service';
 
 @NgModule({
   declarations: [
     AppRecipes,
-    RecipeAddingComponent,
     routingComponents,
     NavigationComponent,
   ],
@@ -31,7 +30,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     AngularFireDatabaseModule,
     AngularFireStorageModule
   ],
-  providers: [recipeService, recipeIngredientService, recipePreparingService, imageService],
+  providers: [recipeService, recipeIngredientService, recipePreparingService, imageService, RecipeDataService],
   bootstrap: [AppRecipes, NavigationComponent]
 })
 export class AppModule { }

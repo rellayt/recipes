@@ -6,34 +6,43 @@
     <div class="RecipeOutterContainer">
       <div
         routerLink="/details"
-        (click)="getRecipeDetails(getRecipeIndex(0))"
+        (click)="onSelect(latestRecipes[0]?.recipeId)"
         class="NewRecipeImgContainer"
       >
-        <img class="NewRecipeImgContainer" src="{{ getRecipeImage(0) }}" />
+        <img
+          class="NewRecipeImgContainer"
+          src="{{ latestRecipes[0]?.image }}"
+        />
       </div>
-      <span class="RecipeTime">{{ getRecipeTime(0) }}</span>
-      <span class="RecipeTitle">{{ getRecipeTitle(0) }}</span>
+      <span class="RecipeTime">{{ latestRecipes[0]?.time }}</span>
+      <span class="RecipeTitle">{{ latestRecipes[0]?.title }}</span>
     </div>
 
     <div class="RecipeOutterContainer">
       <div
-        (click)="getRecipeDetails(getRecipeIndex(1))"
+        (click)="onSelect(latestRecipes[1]?.recipeId)"
         class="OldRecipeImgContainer"
       >
-        <img class="OldRecipeImgContainer" src="{{ getRecipeImage(1) }}" />
+        <img
+          class="OldRecipeImgContainer"
+          src="{{ latestRecipes[1]?.image }}"
+        />
       </div>
-      <span class="RecipeTime">{{ getRecipeTime(1) }}</span>
-      <span class="RecipeTitle">{{ getRecipeTitle(1) }}</span>
+      <span class="RecipeTime">{{ latestRecipes[1]?.time }}</span>
+      <span class="RecipeTitle">{{ latestRecipes[1]?.title }}</span>
     </div>
     <div class="RecipeOutterContainer">
       <div
-        (click)="getRecipeDetails(getRecipeIndex(2))"
+        (click)="onSelect(latestRecipes[2]?.recipeId)"
         class="OldRecipeImgContainer"
       >
-        <img class="OldRecipeImgContainer" src="{{ getRecipeImage(2) }}" />
+        <img
+          class="OldRecipeImgContainer"
+          src="{{ latestRecipes[2]?.image }}"
+        />
       </div>
-      <span class="RecipeTime">{{ getRecipeTime(2) }}</span>
-      <span class="RecipeTitle">{{ getRecipeTitle(2) }}</span>
+      <span class="RecipeTime">{{ latestRecipes[2]?.time }}</span>
+      <span class="RecipeTitle">{{ latestRecipes[2]?.title }}</span>
     </div>
   </section>
 </div>

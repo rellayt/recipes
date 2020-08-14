@@ -1,7 +1,8 @@
-<app-home *ngIf="homePage" (recipeIndex)="intoDetailsPage($event)"></app-home>
-<app-recipe-details
+<!-- <app-home *ngIf="homePage" (recipeIndex)="intoDetailsPage($event)"></app-home> -->
+<!-- <app-recipe-details
   *ngIf="detailsPage"
   [selectedRecipeID]="selectedRecipeID"
   (intoHomePage)="intoHomePage()"
-></app-recipe-details>
-<app-recipe-adding *ngIf="addRecipePage"></app-recipe-adding>
+></app-recipe-details> -->
+<!-- <app-recipe-adding *ngIf="addRecipePage"></app-recipe-adding> -->
+<router-outlet></router-outlet>

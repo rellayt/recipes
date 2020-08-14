@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import { environment } from 'src/environments/environment';
-import { AngularFirestore } from 'angularfire2/firestore';
 import { BehaviorSubject } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 
