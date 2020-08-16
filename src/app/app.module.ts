@@ -14,6 +14,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { NavigationComponent } from './navigation/navigation.component';
 import { RecipeDataService } from './services/recipe.data.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -24,11 +26,13 @@ import { RecipeDataService } from './services/recipe.data.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MaterialModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase, 'recipes'),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    BrowserAnimationsModule
   ],
   providers: [recipeService, recipeIngredientService, recipePreparingService, imageService, RecipeDataService],
   bootstrap: [AppRecipes, NavigationComponent]

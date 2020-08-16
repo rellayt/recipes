@@ -4,6 +4,7 @@ import { recipeIngredientService } from '../services/recipe.ingredient.service';
 import { recipePreparingService } from '../services/recipe.preparing.service';
 import { recipeService } from '../services/recipe.service';
 import { imageService } from '../services/image.service';
+import { RecipeDataService } from '../services/recipe.data.service';
 
 export interface ingredient {
   quantity: string,
@@ -55,7 +56,7 @@ export class RecipeAddingComponent implements OnInit {
   public innerWidth: any;
   mobileMode = false;
 
-  constructor(public recipeService: recipeService, public recipeIngredientService: recipeIngredientService, public recipePreparingService: recipePreparingService, public images: imageService) { }
+  constructor(public recipeDataService: RecipeDataService, public recipeService: recipeService, public recipeIngredientService: recipeIngredientService, public recipePreparingService: recipePreparingService, public images: imageService) { }
 
   ngOnInit(): void {
     // Checking for page width
@@ -63,13 +64,16 @@ export class RecipeAddingComponent implements OnInit {
     this.checkForWidth();
 
     // Calling methods to get max recipe id and url of uploaded image
-    this.recipeService.getRecipes().subscribe(recipes => {
-      this.recipes = recipes;
-      if (this.recipes) {
-        this.recipeMaxIndex = this.recipes.reduce((a, b) => a.recipeId > b.recipeId ? a : b).recipeId;
-      }
-    });
-
+    try {
+      this.recipeDataService.recipeChangingData.subscribe(recipes => {
+        this.recipes = recipes;
+        if (this.recipes.length > 0) {
+          this.recipeMaxIndex = this.recipes.reduce((a, b) => a.recipeId > b.recipeId ? a : b).recipeId;
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
     this.images.currentImage.subscribe(currentImage => {
       if (currentImage !== '') {
         this.recipeToAdd.image = currentImage;
@@ -86,7 +90,7 @@ export class RecipeAddingComponent implements OnInit {
     const findEmptyPrepareField = this.preparing.find(x => x.stepName === '') ? true : false;
 
     if (!findEmptyName && !findEmptyQuantity && !findEmptyPrepareField && this.checkInputs()) {
-      let recipeTime;
+      let recipeTime: string;
       if (this.selectedLevel.value === 'minutes') {
         recipeTime = this.timeInput + ' min';
       }

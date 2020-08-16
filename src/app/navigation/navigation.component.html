@@ -16,7 +16,7 @@
 </div>
 
 <!-- Main page -->
-<div class="RecipesPageWrapper">
+<mat-toolbar class="RecipesPageWrapper">
   <div class="RecipesNavWrapper">
     <nav class="RecipesNavbar">
       <div class="ButtonContainer">
@@ -24,11 +24,12 @@
       </div>
       <ul>
         <li class="NavRecipesItem">
-          <a href="#" routerLink="/add-recipe">Add recipe</a>
+          <button mat-flat-button routerLink="/add-recipe">Add recipe</button>
         </li>
-        <li class="NavRecipesItem"><a href="#">Sample 1</a></li>
-        <li class="NavRecipesItem"><a href="#">Sample 2</a></li>
-        <li class="NavRecipesItem"><a href="#">Sample 3</a></li>
+        <!-- ZROBIC HOVER Z CIEMNIEJSZYM TLEM Z JASNYM HIGHLIGHTEM -->
+        <li class="NavRecipesItem"><button mat-flat-button color="primary" routerLink="/sample1">Sample 1</button></li>
+        <li class="NavRecipesItem"><button mat-flat-button routerLink="/sample2">Sample 2</button></li>
+        <li class="NavRecipesItem"><button mat-flat-button routerLink="/sample3">Sample 3</button></li>
       </ul>
       <div class="MobileMenuContainer" (click)="toogleMenu()">
         <div [className]="menuIcon ? 'MobileMenu' : 'MobileMenuOpen'">
@@ -39,4 +40,4 @@
       </div>
     </nav>
   </div>
-</div>
+</mat-toolbar>
