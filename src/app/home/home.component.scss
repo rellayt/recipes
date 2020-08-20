@@ -48,6 +48,9 @@
     margin-bottom: 1.15rem;
   }
 }
+*:focus {
+  outline: none;
+}
 .NewRecipeImgContainer::after {
   position: absolute;
   background-image: linear-gradient(

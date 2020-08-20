@@ -1,72 +1,70 @@
 <div class="AddRecipeWrapper">
-  <section class="UpperHeadline">
-    <span>Add recipe</span>
-  </section>
-  <section class="BottomHeadline">
-    <span class="BottomText">Basic information</span>
-    <span *ngIf="!mobileMode" class="BottomTextIng">Ingredients</span>
-  </section>
-  <div class="TotalWrap">
-    <div class="InfoIngredientsWrapper">
-      <div class="BasicInfoWrapper">
-        <form>
-          <div class="TitleTimeTypeContainer">
-            <div class="SmallObjectWrapper">
-              <label>Title</label>
-              <input
-                type="text"
-                class="form-control"
-                id="SizeControlTitle"
-                [(ngModel)]="titleInput"
-                [ngModelOptions]="{ standalone: true }"
-              />
-            </div>
-            <div class="TimeTypeWrapper">
-              <div class="SmallObjectWrapper">
-                <label>Time</label>
-                <input
-                  type="number"
-                  min="0"
-                  class="form-control"
-                  id="SizeControlTime"
-                  [(ngModel)]="timeInput"
-                  [ngModelOptions]="{ standalone: true }"
-                />
-              </div>
-              <div class="TypeWrapper">
-                <select
-                  class="form-control"
-                  id="SizeControlType"
-                  [(ngModel)]="selectedLevel"
-                  [ngModelOptions]="{ standalone: true }"
-                >
-                  <option
-                    class="OptionContainer"
-                    *ngFor="let type of selectTimeType"
-                    [ngValue]="type"
-                    >{{ type.value }}</option
-                  >
-                </select>
-              </div>
-            </div>
-          </div>
-        </form>
-
-        <div class="TextareaContainer">
-          <label>Description</label>
-          <textarea
-            [(ngModel)]="descriptionInput"
-            class="form-control"
-            rows="3"
-          ></textarea>
-        </div>
-
-        <button
-          (click)="fileInput.click()"
-          class="btn btn-primary"
-          *ngIf="!imageUploaded"
+  <div class="AddRecipeTitle"><span>Add recipe</span></div>
+  <div class="BasicInfoIngredientsWrapper">
+    <div class="BasicInfoWrapper">
+      <span>Basic information</span>
+      <!-- Title -->
+      <mat-form-field
+        appearance="fill"
+        class="TitleTimeContainer"
+        [formGroup]="BasicInformationForm"
+      >
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="titleInput" formControlName="title" />
+        <mat-error
+          *ngIf="BasicInformationForm.controls.title.hasError('required')"
         >
-          Upload image
+          Title cannot be <strong>empty</strong>
+        </mat-error>
+      </mat-form-field>
+      <!-- Time -->
+      <mat-form-field
+        appearance="fill"
+        class="TitleTimeContainer"
+        [formGroup]="BasicInformationForm"
+      >
+        <mat-label>Time</mat-label>
+        <mat-select [(ngModel)]="selectedLevel" formControlName="time">
+          <mat-option *ngFor="let time of timeOptions" [value]="time.value">
+            {{ time.value }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="BasicInformationForm.controls.time.hasError('required')"
+        >
+          Time must be <strong>selected</strong>
+        </mat-error>
+      </mat-form-field>
+      <!-- Description -->
+      <mat-form-field
+        appearance="fill"
+        class="DescriptionContainer"
+        [formGroup]="BasicInformationForm"
+      >
+        <mat-label>Description</mat-label>
+        <textarea
+          #desc
+          matInput
+          maxlength="350"
+          [(ngModel)]="descriptionInput"
+          formControlName="description"
+          (input)="limitLines($event, 6)"
+        ></textarea>
+        <mat-error
+          *ngIf="BasicInformationForm.controls.description.hasError('required')"
+        >
+          Description cannot be <strong>empty</strong>
+        </mat-error>
+      </mat-form-field>
+      <div class="MessageValueLength">{{ desc.value.length }} / 350</div>
+      <!-- Image -->
+      <div *ngIf="imageUploaded" class="ImageContainer">
+        <span>Image</span>
+        <img src="{{ recipeToAdd.image }}" />
+      </div>
+      <div *ngIf="!imageUploaded" class="UploadImageButton">
+        <button mat-raised-button (click)="fileInput.click()">
+          Choose image
           <input
             #fileInput
             type="file"
@@ -74,99 +72,134 @@
             style="display: none;"
           />
         </button>
-        <div class="RecipeUploadedImageContainer" *ngIf="imageUploaded">
-          <span>Uploaded image</span>
-          <img src="{{ getRecipeUploadedImage() }}" />
-        </div>
       </div>
-      <div class="IngredientsWrapper">
-        <span *ngIf="mobileMode" class="BottomTextIng">Ingredients</span>
-
-        <div class="QuantityNameWrapper">
-          <span class="QuantityContainer">Quantity</span>
-          <span class="IngrendientNameContainer">Name</span>
-        </div>
+    </div>
+    <!-- Ingrediens -->
+    <div class="IngredientsWrapper">
+      <span>Ingredients</span>
+      <div class="QuantityNameWrapper" [formGroup]="FirstIngredientsForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Quantity</mat-label>
+          <input
+            matInput
+            [(ngModel)]="firstQuantity"
+            maxlength="10"
+            formControlName="firstQuantityControl"
+          />
+          <mat-error
+            *ngIf="
+              FirstIngredientsForm.controls.firstQuantityControl.hasError(
+                'required'
+              )
+            "
+          >
+            Quantity cannot be <strong>empty</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            [(ngModel)]="firstIngredientName"
+            maxlength="28"
+            formControlName="firstNameControl"
+          />
+          <mat-error
+            *ngIf="
+              FirstIngredientsForm.controls.firstNameControl.hasError(
+                'required'
+              )
+            "
+          >
+            Ingredient name cannot be <strong>empty</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div [formGroup]="formGroup">
         <div
-          *ngFor="let ingredient of ingredients; let i = index"
-          class="QuantityNameInputs_Wrapper"
+          formArrayName="IngredientsArr"
+          class="QuantityNameWrapperFor"
+          *ngFor="let ingredientGroup of getIngredientControls(); let i = index"
         >
-          <div class="QuantityInputContainer">
+          <mat-form-field appearance="fill" [formGroup]="ingredientGroup">
             <input
-              type="text"
-              class="form-control"
-              id="SizeControlQuantityInput"
+              matInput
+              maxlength="12"
+              formControlName="QuantityControl"
               [(ngModel)]="ingredients[i].quantity"
             />
-          </div>
-          <div class="IngredientNameInputContainer">
+            <mat-error
+              *ngIf="
+                ingredientGroup.controls.QuantityControl.hasError('required')
+              "
+            >
+              Quantity cannot be <strong>empty</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill" [formGroup]="ingredientGroup">
             <input
-              type="text"
-              class="form-control"
-              id="SizeControlNameInput"
+              matInput
+              maxlength="30"
+              formControlName="NameControl"
               [(ngModel)]="ingredients[i].name"
             />
-          </div>
-        </div>
-        <div class="AddNextIngredientButton">
-          <button
-            type="button"
-            id="SizeControlIngredientButton"
-            class="btn btn-primary"
-            (click)="addIngredient()"
-          >
-            Add next
-          </button>
+            <mat-error
+              *ngIf="ingredientGroup.controls.NameControl.hasError('required')"
+            >
+              Ingredient name cannot be <strong>empty</strong>
+            </mat-error>
+          </mat-form-field>
         </div>
       </div>
-    </div>
-    <div class="PreparingWrapper">
-      <div class="BottomTextLast">Preparing</div>
-      <div>
-        <ul>
-          <li
-            *ngFor="let step of preparing; let i = index"
-            class="StepContainer"
-          >
-            <textarea
-              class="form-control"
-              id="SizeControlStepInput"
-              [(ngModel)]="preparing[i].stepName"
-              rows="3"
-            ></textarea>
-          </li>
-        </ul>
-      </div>
-      <div class="NextStepButton">
-        <button
-          type="button"
-          id="SizeControlPreparingButton"
-          class="btn btn-primary"
-          (click)="addStep(preparing.length)"
-        >
-          Next step
+      <div class="IngredientsButton">
+        <button mat-raised-button (click)="addIngredient()">
+          Add next
         </button>
       </div>
     </div>
-    <section class="SubmitSectionContainer">
-      <div *ngIf="!mobileMode" class="col text-center">
-        <button
-          type="button"
-          id="SizeControlSubmitButton"
-          class="btn btn-primary"
-          (click)="addRecipe()"
-        >
-          Submit
-        </button>
-      </div>
-      <button
-        *ngIf="mobileMode"
-        type="button"
-        id="SizeControlSubmitButton"
-        class="btn btn-primary"
-        (click)="addRecipe()"
+  </div>
+  <div class="PreparingWrapper" [formGroup]="formGroup">
+    <span>Preparing</span>
+    <mat-list role="list" formArrayName="PreparingArr">
+      <div
+        class="StepWrapper"
+        *ngFor="let prepareGroup of getPrepareControls(); let i = index"
       >
-        Submit
+        <mat-list-item>
+          <div class="StepLowerWrapper">
+            <span class="StepNumberContainer">{{ i + 1 }}.</span>
+            <mat-form-field
+              appearance="fill"
+              class="PreparingFieldContainer"
+              [formGroup]="prepareGroup"
+            >
+              <textarea
+                #desc
+                matInput
+                maxlength="200"
+                (input)="limitLines($event, 3)"
+                [(ngModel)]="preparing[i].stepName"
+                formControlName="StepControl"
+              ></textarea>
+              <mat-error
+                *ngIf="prepareGroup.controls.StepControl.hasError('required')"
+              >
+                Preparing step cannot be <strong>empty</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-list-item>
+      </div>
+    </mat-list>
+    <div class="PreparingButtonContainer">
+      <button mat-raised-button (click)="addStep(preparing.length)">
+        Next step
       </button>
-    </section>
+    </div>
+  </div>
+  <div class="SubmitButtonContainer">
+    <button mat-raised-button (click)="addRecipe()">
+      Submit
+    </button>
   </div>
 </div>

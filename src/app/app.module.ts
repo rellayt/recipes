@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppRecipes } from './recipe-main-app/app.recipes';
 import { environment } from '../environments/environment.prod';
@@ -28,6 +28,7 @@ import { MaterialModule } from './material/material.module';
     AppRoutingModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase, 'recipes'),
     AngularFirestoreModule,
     AngularFireDatabaseModule,

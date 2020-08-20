@@ -5,15 +5,23 @@ import { recipePreparingService } from '../services/recipe.preparing.service';
 import { recipeService } from '../services/recipe.service';
 import { imageService } from '../services/image.service';
 import { RecipeDataService } from '../services/recipe.data.service';
+import { Validators, FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
-export interface ingredient {
-  quantity: string,
+interface Ingredient {
+  quantity: string;
   name: string;
 }
-export interface preparing {
-  stepNumber: number,
+interface Preparing {
+  stepNumber: number;
   stepName: string;
 }
+export interface TimeOptions {
+  value: string;
+}
+
+
 @Component({
   selector: 'app-recipe-adding',
   templateUrl: './recipe-adding.component.html',
@@ -38,31 +46,54 @@ export class RecipeAddingComponent implements OnInit {
   timeTypeInput = '';
   descriptionInput = '';
   stepInput: string[];
-  selectTimeType: selectOption[] = [{ id: 0, value: 'minutes' }, { id: 1, value: 'hours' }];
+  timeOptions: TimeOptions[] = [
+    { value: '15 minutes' },
+    { value: '30 minutes' },
+    { value: '45 minutes' },
+    { value: '1 hour' },
+    { value: '2 hours' }
+  ];
   stepCount = 0;
   selectedLevel;
   imageUploaded = false;
+  firstQuantity = '';
+  firstIngredientName = '';
 
-  public preparing: preparing[] = [{
+  preparing: Preparing[] = [{
     stepNumber: 1,
     stepName: '',
   }];
-  public ingredients: ingredient[] = [{
-    quantity: '',
-    name: '',
-  }];
+  ingredients: Ingredient[] = [];
 
-  // Variables used to improve website responsiveness
-  public innerWidth: any;
-  mobileMode = false;
+  //Form controls
+  formGroup: FormGroup;
 
-  constructor(public recipeDataService: RecipeDataService, public recipeService: recipeService, public recipeIngredientService: recipeIngredientService, public recipePreparingService: recipePreparingService, public images: imageService) { }
+  BasicInformationForm = new FormGroup({
+    title: new FormControl('', [Validators.required]),
+    time: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required])
+  });
+
+  FirstIngredientsForm = new FormGroup({
+    firstQuantityControl: new FormControl('', [Validators.required]),
+    firstNameControl: new FormControl('', [Validators.required])
+  });
+
+
+  // tslint:disable-next-line: max-line-length
+  constructor(public router: Router, private snackBar: MatSnackBar, private fb: FormBuilder, public recipeDataService: RecipeDataService, public recipeService: recipeService, public recipeIngredientService: recipeIngredientService, public recipePreparingService: recipePreparingService, public images: imageService) {
+    this.formGroup = this.fb.group
+      ({
+        IngredientsArr: this.fb.array([]),
+        PreparingArr: this.fb.array([]),
+      });
+    const Preparings = this.formGroup.get('PreparingArr') as FormArray;
+    Preparings.push(this.fb.group({
+      StepControl: new FormControl('', [Validators.required])
+    }));
+  }
 
   ngOnInit(): void {
-    // Checking for page width
-    this.innerWidth = window.innerWidth;
-    this.checkForWidth();
-
     // Calling methods to get max recipe id and url of uploaded image
     try {
       this.recipeDataService.recipeChangingData.subscribe(recipes => {
@@ -90,15 +121,15 @@ export class RecipeAddingComponent implements OnInit {
     const findEmptyPrepareField = this.preparing.find(x => x.stepName === '') ? true : false;
 
     if (!findEmptyName && !findEmptyQuantity && !findEmptyPrepareField && this.checkInputs()) {
-      let recipeTime: string;
-      if (this.selectedLevel.value === 'minutes') {
-        recipeTime = this.timeInput + ' min';
-      }
-      else if (this.timeInput !== 1) {
-        recipeTime = this.timeInput + ' hours';
+      let recipeTime = String(this.selectedLevel);
+      if (recipeTime.substring(3) === 'minutes') {
+        recipeTime = recipeTime.substring(0, 2) + ' min';
+      } else if (recipeTime.substring(2) === 'hours') {
+        recipeTime = recipeTime.substring(0, 1) + ' hours';
       } else {
-        recipeTime = this.timeInput + ' hour';
+        recipeTime = recipeTime.substring(0, 1) + ' hour';
       }
+
       this.recipeToAdd.recipeId = this.recipeMaxIndex + 1;
       this.recipeToAdd.title = this.titleInput;
       this.recipeToAdd.time = recipeTime;
@@ -106,6 +137,7 @@ export class RecipeAddingComponent implements OnInit {
 
       this.recipePreparingToAdd.recipeId = this.recipeMaxIndex + 1;
       this.recipeIngredientToAdd.recipeId = this.recipeMaxIndex + 1;
+      this.ingredients.unshift({ quantity: this.firstQuantity, name: this.firstIngredientName });
 
       for (const prepare of this.preparing) {
         this.recipePreparingToAdd.stepNumber = prepare.stepNumber;
@@ -118,27 +150,51 @@ export class RecipeAddingComponent implements OnInit {
         this.recipeIngredientService.addRecipeIngredient(this.recipeIngredientToAdd);
       }
       this.recipeService.addRecipe(this.recipeToAdd);
+      this.router.navigate(['/home']);
+      this.openSnackBar();
       this.resetInputValues();
     }
   }
-
+  openSnackBar() {
+    this.snackBar.open('Recipe added succesfully', 'Cancel', {
+      duration: 1200,
+      horizontalPosition: 'end',
+      verticalPosition: 'bottom',
+      panelClass: ['add-snackbar']
+    });
+  }
   // Method responsible for validating and adding single ingredient to temporary array which will be added to database
   addIngredient() {
     const findEmptyName = this.ingredients.find(x => x.name === '') ? true : false;
     const findEmptyQuantity = this.ingredients.find(x => x.quantity === '') ? true : false;
-
-    if (!findEmptyName && !findEmptyQuantity) {
-      const emptyIngredient: ingredient = { name: '', quantity: '' };
+    if (!findEmptyName && !findEmptyQuantity && this.firstIngredientName !== '' && this.firstQuantity !== '') {
+      const Ingredients = this.formGroup.get('IngredientsArr') as FormArray;
+      Ingredients.push(this.fb.group({
+        QuantityControl: new FormControl('', [Validators.required]),
+        NameControl: new FormControl('', [Validators.required])
+      }));
+      const emptyIngredient: Ingredient = { name: '', quantity: '' };
       this.ingredients.push(emptyIngredient);
     }
   }
-
+  getIngredientControls() {
+    return (this.formGroup.get('IngredientsArr') as FormArray).controls;
+  }
+  getPrepareControls() {
+    return (this.formGroup.get('PreparingArr') as FormArray).controls;
+  }
   // Method responsible for validating and adding single preape step to temporary array which will be added to database
   addStep(stepNumber: number) {
     const findEmptyPrepareField = this.preparing.find(x => x.stepName === '') ? true : false;
 
     if (!findEmptyPrepareField) {
-      const emptyPrepareField: preparing = { stepNumber: stepNumber + 1, stepName: '' }
+
+      const Preparings = this.formGroup.get('PreparingArr') as FormArray;
+      Preparings.push(this.fb.group({
+        StepControl: new FormControl('', [Validators.required])
+      }));
+
+      const emptyPrepareField: Preparing = { stepNumber: stepNumber + 1, stepName: '' }
       this.preparing.push(emptyPrepareField);
     }
   }
@@ -150,14 +206,9 @@ export class RecipeAddingComponent implements OnInit {
     }
   }
 
-  // Method which returns url of uploaded image
-  getRecipeUploadedImage = () => {
-    return this.recipeToAdd.image ? this.recipeToAdd.image : '';
-  }
-
   // Method responsible for validate title, prepare time, description, selected level and image's url inputs
   checkInputs = (): boolean => {
-    if (this.titleInput !== '' && this.timeInput && this.descriptionInput !== '' && this.selectedLevel && this.recipeToAdd.image) {
+    if (this.titleInput !== '' && this.descriptionInput !== '' && this.selectedLevel && this.recipeToAdd.image) {
       return true;
     } else {
       return false;
@@ -177,30 +228,35 @@ export class RecipeAddingComponent implements OnInit {
       stepNumber: 1,
       stepName: '',
     }];
-    this.ingredients = [{
-      quantity: '',
-      name: '',
-    }];
+    this.ingredients = [];
+    this.firstQuantity = '';
+    this.firstIngredientName = '';
     this.imageUploaded = false;
+    this.formGroup = this.fb.group
+      ({
+        IngredientsArr: this.fb.array([]),
+        PreparingArr: this.fb.array([])
+      });
+    const Preparings = this.formGroup.get('PreparingArr') as FormArray;
+    Preparings.push(this.fb.group({
+      StepControl: new FormControl('', [Validators.required])
+    }));
   }
 
-  // Checking page width for mobile efficiency
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.innerWidth = Number(window.innerWidth);
-    this.checkForWidth();
-  }
-
-  checkForWidth = () => {
-    if (this.innerWidth >= 535 && this.innerWidth <= 560) {
-      this.mobileMode = true;
-    } else if (this.innerWidth >= 320 && this.innerWidth <= 420) {
-      this.mobileMode = true;
-    } else {
-      this.mobileMode = false;
+  limitLines(event: InputEvent, maxLines: number) {
+    const text = (event.target as HTMLTextAreaElement).value;
+    if (text.length > 0) {
+      const lineCount = 1 + text.replace(/[^\n]/g, '').length;
+      if (lineCount > maxLines) {
+        const textArray = text.split('\n');
+        const newText = textArray.reduce((result, line, lineNum) => {
+          if (lineNum < maxLines) {
+            return result.concat('\n').concat(line);
+          }
+          return result.concat(line);
+        });
+        (event.target as HTMLTextAreaElement).value = newText;
+      }
     }
   }
-}
-export class selectOption {
-  constructor(public id: number, public value: string) { }
 }

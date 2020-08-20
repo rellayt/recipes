@@ -1,373 +1,402 @@
 $PrimaryColor: #ffbb00;
+// Main wrapper
 .AddRecipeWrapper {
-  height: 90vh;
-  margin: 0 20% 0 21%;
-  width: 60%;
+  height: auto;
+  width: 60vw;
   display: flex;
   flex-direction: column;
+  margin: auto;
   @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    margin: 0 10% 0 10.5%;
+    width: 75vw;
   }
   @media (min-device-width: 320px) and (max-device-width: 420px) {
-    margin: 0 3%;
+    width: 95vw;
   }
 }
-.UpperHeadline {
-  font-size: 25px;
-  font-weight: 700;
+
+.AddRecipeTitle {
+  margin-top: 20px;
   width: 100%;
-  margin: 2% 0;
-}
-.BottomHeadline {
-  font-size: 20px;
-  display: flex;
-  width: auto;
-  margin: 2% 0;
-}
-.BottomText {
-  width: 50%;
-  font-size: 1.4rem;
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    width: 100%;
-  }
-}
-.BottomTextIng {
-  font-size: 1.4rem;
-
-  @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    margin-left: 56px;
-  }
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    margin: 1.5rem 0;
-  }
-}
-.BottomTextLast {
-  @extend .BottomText;
-  margin-bottom: 0.7rem;
-  @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    margin-top: 1rem;
-  }
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    margin-top: 1rem;
-  }
-}
-.Headline span {
-  font-size: 25px;
-  font-weight: 600;
-}
-.RecipeUploadedImageContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2%;
-
-  & > img {
-    display: flex;
-    margin-top: 5px;
-    border-radius: 2%;
-    width: 70%;
-    height: 70%;
-    object-fit: cover;
-  }
-  & > span {
-    margin-bottom: 1.5px;
-    font-size: 1.15rem;
-  }
-}
-#SizeControlTitle {
-  width: 20.88vh;
-  @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    width: 22vw;
-    margin-right: 40px;
-  }
-
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    width: 50vw;
-    margin-right: 40px;
-  }
-}
-#SizeControlTime {
-  width: 8vh;
-  @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    width: 7.5vw;
-  }
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    width: 18.5vw;
-  }
-}
-#SizeControlType {
-  width: 12vh;
-  @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    width: 14vw;
-  }
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    width: 30vw;
-  }
-}
-.TitleTimeTypeContainer {
-  display: flex;
-  flex-direction: column;
-}
-.TimeTypeWrapper {
-  margin-top: 1.5%;
-  display: flex;
-  align-items: flex-end;
-  @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    margin-top: 3%;
-  }
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    margin-top: 3%;
+  height: 7vh;
+  span {
+    font-size: 25px;
+    font-weight: 700;
   }
 }
 
-option:hover {
-  background-color: $PrimaryColor !important;
-  color: white !important;
-  cursor: pointer;
-}
-
-.TextareaContainer {
-  margin-top: 1.5%;
-  width: 96%;
-  height: 12.8vh;
-  margin-bottom: 2.7rem;
-  & > label {
-    font-size: 1.15rem;
-  }
-  & > textarea {
-    resize: none;
-    height: 95%;
-  }
-  @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    height: 27vh;
-    width: 100%;
-    margin-top: 3%;
-  }
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    height: 29vh;
-    width: 90vw;
-    margin-top: 3%;
-  }
-}
-.QuantityContainer {
-  font-size: 1.15rem;
-  width: 8rem;
-  @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    width: 7rem;
-  }
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    width: 7.3rem;
-  }
-}
 .BasicInfoIngredientsWrapper {
   display: flex;
-  flex-direction: column;
-}
-
-.btn-primary {
-  background-color: white;
-  color: $PrimaryColor;
-  font-size: 19px;
-  width: 150px;
-  height: 50px;
-  border: 2px solid $PrimaryColor;
-  transition: all 300ms ease;
-  opacity: 1;
-  &:hover,
-  &:active,
-  &:visited {
-    transition: all 300ms ease;
-    opacity: 0.9;
-    background-color: $PrimaryColor !important;
-    color: white !important;
-    border: 2px solid $PrimaryColor !important;
-    box-shadow: none !important;
+  .mat-error {
+    position: relative;
+    display: inline;
+    bottom: 1px;
   }
-  &:focus {
-    box-shadow: none !important;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    flex-direction: column;
   }
-}
-.form-control {
-  border: 2px solid $PrimaryColor;
-  transition: all 300ms ease;
-  &:hover,
-  &:focus,
-  &:active,
-  &:visited {
-    transition: all 300ms ease;
-    border: 2px solid $PrimaryColor !important;
-    box-shadow: none !important;
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    flex-direction: column;
   }
 }
 
-select:focus > option:checked {
-  background: $PrimaryColor;
-  color: white;
-}
-.SmallObjectWrapper {
-  display: flex;
-  flex-direction: column;
-  & > label {
-    font-size: 1.15rem;
-  }
-}
-.TypeWrapper {
-  @extend .SmallObjectWrapper;
-  margin-left: 0.4rem;
-}
-.PreparingWrapper {
-  width: 50%;
-}
-.QuantityNameWrapper {
-  display: flex;
-}
-.IngrendientNameContainer {
-  font-size: 1.15rem;
-}
-.QuantityNameInputs_Wrapper {
-  margin-top: 0.4rem;
-  display: flex;
-  margin-bottom: 0.4rem;
-}
 .BasicInfoWrapper {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
   height: auto;
+  span {
+    margin: 2rem 0;
+    font-size: 22px;
+    width: 100%;
+  }
+  mat-select {
+    color: $PrimaryColor;
+  }
+  :nth-child(2) {
+    margin-bottom: 0.3rem;
+  }
+  :nth-child(3) {
+    margin-bottom: 0.3rem;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 95vw;
+  }
+}
+.TitleTimeContainer {
+  width: 15vw;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 31vw;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 55vw;
+  }
+}
+.DescriptionContainer {
+  width: 28vw;
+  textarea {
+    height: 12vh;
+    resize: none;
+  }
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 55vw;
+    textarea {
+      height: 29vh;
+    }
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 95vw;
+    textarea {
+      height: 38vh;
+    }
+  }
+}
+.MessageValueLength {
+  width: 28vw;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  bottom: 20px;
+  font-size: 0.8rem;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 55vw;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 95vw;
+  }
+}
+.UploadImageButton {
+  width: 15vw;
+  position: relative;
+  bottom: 5px;
+  button {
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+.ImageContainer {
+  width: 100%;
+  height: 100%;
+  img {
+    object-fit: cover;
+    width: 18vw;
+    height: 14vw;
+    border-radius: 10px;
+  }
+  span {
+    display: block;
+    margin: 0 0 1.5rem 0;
+  }
 }
 
 .IngredientsWrapper {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    margin-left: 10vw;
+  width: 50%;
+  height: auto;
+  span {
+    margin: 2rem 0;
+    font-size: 22px;
+    width: 100%;
   }
   @media (min-device-width: 320px) and (max-device-width: 420px) {
-    margin: 0;
+    width: 100%;
   }
 }
-.InfoIngredientsWrapper {
+.QuantityNameWrapper {
   display: flex;
-  width: 100%;
-  min-height: 42vh;
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    flex-direction: column;
-  }
-}
-.IngredientNameInputContainer {
-  & > input {
-    width: 50%;
-  }
-}
-.QuantityInputContainer {
-  margin-right: 3.5rem;
-  @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    margin-right: 2.5rem;
-  }
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    margin-right: 2.8rem;
-  }
-}
-#SizeControlQuantityInput {
-  width: 4.5rem;
-}
-#SizeControlNameInput {
-  width: 12rem;
-}
-.AddNextIngredientButton {
-  width: 34vh;
-  display: flex;
-  flex-direction: row-reverse;
-  @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    width: 53.5vh;
-  }
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    flex-direction: row;
-  }
-}
 
-#SizeControlIngredientButton {
-  margin-top: 0.4rem;
-  width: 12vh;
-  height: 5vh;
+  :first-child {
+    margin-right: 7%;
+    width: 6vw;
+    input {
+      width: 100%;
+    }
+  }
+  :nth-child(2) {
+    width: 15vw;
+    input {
+      width: 100%;
+    }
+  }
   @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    width: 21vh;
-    height: 8vh;
+    :first-child {
+      width: 12vw;
+    }
+    :nth-child(2) {
+      width: 22vw;
+    }
   }
   @media (min-device-width: 320px) and (max-device-width: 420px) {
-    width: 21vh;
-    height: 8vh;
+    :first-child {
+      width: 26vw;
+    }
+    :nth-child(2) {
+      width: 69vw;
+    }
   }
 }
-.TotalWrap {
+.QuantityNameWrapperFor {
+  display: flex;
+  margin-top: 1rem;
+  ::ng-deep.mat-form-field-appearance-fill .mat-form-field-infix {
+    padding: 0;
+    position: relative;
+    bottom: 10px;
+  }
+  :first-child {
+    margin-right: 7%;
+    width: 6vw;
+    input {
+      width: 100%;
+    }
+  }
+  :nth-child(2) {
+    width: 15vw;
+    input {
+      width: 100%;
+    }
+  }
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    :first-child {
+      width: 12vw;
+    }
+    :nth-child(2) {
+      width: 22vw;
+    }
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    :first-child {
+      width: 26vw;
+    }
+    :nth-child(2) {
+      width: 69vw;
+    }
+  }
+}
+.IngredientsButton {
+  display: flex;
+  justify-content: flex-end;
+  width: 23vw;
+  position: relative;
+  bottom: -10px;
+  button {
+    width: 5vw;
+    font-size: 1.1rem;
+    padding: 0.4rem 0.8rem;
+    &:focus {
+      outline: none;
+    }
+  }
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 36vw;
+    button {
+      width: 10vw;
+    }
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 95vw;
+    button {
+      width: 29vw;
+    }
+  }
+}
+.PreparingWrapper {
   display: flex;
   flex-direction: column;
-}
-.StepContainer {
-  font-size: 1.5rem;
-  list-style-type: decimal;
-  font-weight: 500;
-  margin-left: 1.7rem;
-}
-#SizeControlStepInput {
-  margin-top: 0.4rem;
-  margin-bottom: 0.4rem;
-  width: 95%;
-  height: 9.6vh;
-  resize: none;
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    width: 84vw;
-    height: 15vh;
-  }
-}
-.NextStepButton {
-  width: 95%;
-  display: flex;
-  flex-direction: row-reverse;
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    display: block;
-  }
-}
-#SizeControlPreparingButton {
-  margin-bottom: 0.2rem;
-  width: 14vh;
-  height: 5vh;
-  @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    width: 15vw;
-    height: 6vw;
-  }
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    width: 30vw;
-    height: 13vw;
-  }
-}
-.SubmitSectionContainer {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
   width: 50%;
-  @media (min-device-width: 320px) and (max-device-width: 420px) {
-    width: 92vw;
-    display: flex;
-    justify-content: flex-end;
+  height: auto;
+  span:first-child {
+    margin: 2rem 0 1rem 0;
+    font-size: 22px;
   }
-}
-#SizeControlSubmitButton {
-  color: white;
-  background-color: $PrimaryColor;
-  font-size: 1.7rem;
-  width: 15vh;
-  height: 6vh;
-  &:hover {
-    color: $PrimaryColor;
-    background-color: white;
+  ::ng-deep.mat-list-base .mat-list-item .mat-list-item-content {
+    padding: 0;
+  }
+  button {
+    font-size: 1.2rem;
+    padding: 0.4rem 0.8rem;
+    margin-bottom: 0.8rem;
+    &:focus {
+      outline: none;
+    }
+  }
+  ::ng-deep.mat-form-field-appearance-fill .mat-form-field-infix {
+    padding: 0;
+    position: relative;
+    bottom: 10px;
   }
   @media (min-device-width: 768px) and (max-device-width: 1112px) {
-    width: 15vw;
-    height: 7vw;
-    margin-bottom: 0.5rem;
+    span:first-child {
+      margin: 2rem 0 4rem 0;
+      position: relative;
+      bottom: -12px;
+      font-size: 22px;
+    }
   }
   @media (min-device-width: 320px) and (max-device-width: 420px) {
-    width: 29vw;
-    height: 15vw;
-    margin-bottom: 0.5rem;
+    span:first-child {
+      margin: 2rem 0 4rem 0;
+      position: relative;
+      bottom: -12px;
+      font-size: 22px;
+    }
   }
+}
+.PreparingFieldContainer {
+  width: 100%;
+  margin-left: 1.5rem;
+  textarea {
+    height: 6.5vh;
+    resize: none;
+  }
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    textarea {
+      width: 100%;
+      height: 21.5vh;
+      resize: none;
+    }
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    textarea {
+      width: 100%;
+      height: 21.5vh;
+      resize: none;
+    }
+  }
+}
+.StepNumberContainer {
+  position: relative;
+  bottom: 1vh;
+  margin: 0 2rem 0 0;
+  width: 0.5rem;
+  font-size: 22px;
+}
+.StepWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  margin-bottom: 2rem;
+  height: 8vh;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 50vw;
+    margin-bottom: 7rem;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 95vw;
+    margin-bottom: 7rem;
+  }
+}
+.PreparingButtonContainer {
+  width: 94%;
+  display: flex;
+  justify-content: flex-end;
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 47vw;
+    position: relative;
+    top: -50px;
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 95vw;
+    position: relative;
+    top: -50px;
+    justify-content: center;
+  }
+}
+.StepLowerWrapper {
+  width: 94%;
+  display: flex;
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 100%;
+  }
+}
+.SubmitButtonContainer {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  button {
+    font-size: 1.5rem;
+    padding: 0.6rem 1rem;
+    margin-bottom: 1.2rem;
+    &:focus {
+      outline: none;
+    }
+  }
+  @media (min-device-width: 768px) and (max-device-width: 1112px) {
+    width: 45vw;
+    button {
+      font-size: 1.5rem;
+      position: relative;
+      bottom: 2rem;
+    }
+  }
+  @media (min-device-width: 320px) and (max-device-width: 420px) {
+    width: 95vw;
+    button {
+      font-size: 1.5rem;
+      position: relative;
+    }
+  }
+}
+mat-error {
+  position: relative;
+  right: 10px;
+}
+::ng-deep.mat-form-field-ripple {
+  background-color: $PrimaryColor;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  color: black !important;
+}
+::ng-deep.mat-form-field-ripple {
+  background-color: $PrimaryColor !important;
+}
+::ng-deep.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: black !important;
+  font-size: 17px;
+}
+::ng-deep.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: $PrimaryColor;
 }
